@@ -13,10 +13,13 @@ const DATA_FILE = path.join(__dirname, 'data', 'attendance.json');
 // month: 월 필터용, active: 출석 가능 여부
 // ═══════════════════════════════════════════════════════════
 const LECTURES = {
-  '03AB': { name: '3월 기초반 A/B', month: '3월', active: true },
-  '03C':  { name: '3월 심화반 C',   month: '3월', active: false },
-  '04AB': { name: '4월 기초반 A/B', month: '4월', active: false },
-  '04C':  { name: '4월 심화반 C',   month: '4월', active: false },
+  // 교육청
+  '03AB':  { name: '3월 기초반 A/B', month: '3월', group: '교육청', active: true },
+  '03C':   { name: '3월 심화반 C',   month: '3월', group: '교육청', active: false },
+  '04AB':  { name: '4월 기초반 A/B', month: '4월', group: '교육청', active: false },
+  '04C':   { name: '4월 심화반 C',   month: '4월', group: '교육청', active: false },
+  // 지자체
+  'gov03': { name: '3월 북구청',      month: '3월', group: '지자체', active: false },
 };
 
 // ═══════════════════════════════════════════════════════════

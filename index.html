@@ -227,6 +227,12 @@
       background: rgba(247, 37, 133, 0.06);
     }
 
+    .badge-gov {
+      color: var(--yellow);
+      border-color: rgba(254, 228, 64, 0.3);
+      background: rgba(254, 228, 64, 0.06);
+    }
+
     .card-title {
       font-size: 20px;
       font-weight: 900;
@@ -894,6 +900,19 @@
         desc: '고급 프롬프트 설계 · 체인 프롬프팅 · 실전 적용',
         status: 'upcoming',
         color: '--pink',
+        group: '교육청',
+      },
+      // ── 지자체 ──
+      {
+        id: 'gov03',
+        month: '3월',
+        cls: '북구청',
+        badge: 'gov',
+        title: '지자체 AI 활용',
+        desc: '3.19 북구청 · 업무 AI 적용 · 실전 활용',
+        status: 'upcoming',
+        color: '--yellow',
+        group: '지자체',
       },
     ];
 
@@ -1097,7 +1116,8 @@
           `<span class="card-dot"></span>`
         ).join('');
 
-        const badgeClass = lec.badge === 'adv' ? 'badge-adv' : 'badge-class';
+        const badgeMap = { adv: 'badge-adv', gov: 'badge-gov' };
+        const badgeClass = badgeMap[lec.badge] || 'badge-class';
 
         let statusHTML = '';
         if (isUpcoming) {
