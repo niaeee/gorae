@@ -2312,6 +2312,7 @@
     function render() {
       const s = slides[current];
       slideEl.className = `slide ${direction > 0 ? "enter-right" : "enter-left"}`;
+      slideEl.scrollTop = 0;
       slideEl.innerHTML = s.render();
 
       const ratio = (current / (slides.length - 1)) * 100;
