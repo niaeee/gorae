@@ -62,17 +62,24 @@ app.post('/api/verify', (req, res) => {
     return res.json({ success: false, message: '아직 준비되지 않은 강의입니다.' });
   }
 
-  const entry = {
-    name,
-    dept,
-    lectureId,
-    lectureName: lecture.name,
-    month: lecture.month,
-    timestamp: new Date().toISOString(),
-  };
-  attendanceLog.push(entry);
-  saveAttendance();
-  console.log('[ATTENDANCE]', JSON.stringify(entry));
+  // 동일인 중복 출석 방지 (같은 이름 + 부서 + 강의)
+  const existing = attendanceLog.find(
+    e => e.lectureId === lectureId && e.name === name && e.dept === dept
+  );
+
+  if (!existing) {
+    const entry = {
+      name,
+      dept,
+      lectureId,
+      lectureName: lecture.name,
+      month: lecture.month,
+      timestamp: new Date().toISOString(),
+    };
+    attendanceLog.push(entry);
+    saveAttendance();
+    console.log('[ATTENDANCE]', JSON.stringify(entry));
+  }
 
   let access = {};
   try {
@@ -81,7 +88,8 @@ app.post('/api/verify', (req, res) => {
       : {};
   } catch { access = {}; }
 
-  access[lectureId] = { name, dept, timestamp: entry.timestamp };
+  const ts = existing ? existing.timestamp : attendanceLog[attendanceLog.length - 1].timestamp;
+  access[lectureId] = { name, dept, timestamp: ts };
 
   res.cookie('gorae_access', JSON.stringify(access), {
     signed: true,
