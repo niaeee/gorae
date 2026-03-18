@@ -1,0 +1,14 @@
+{
+  "name": "gorae-i-2026",
+  "version": "1.0.0",
+  "description": "고래.I 울산광역시교육청 AI 연구학습동아리 강의 포털",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "cookie-parser": "^1.4.7"
+  }
+}

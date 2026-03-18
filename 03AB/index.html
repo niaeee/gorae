@@ -1,0 +1,2397 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>고래.I 오리엔테이션 2026</title>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --paper: #f8fafc;
+      --blue: #3b82f6;
+      --cyan: #22d3ee;
+      --pink: #fb7185;
+      --lime: #84cc16;
+      --amber: #f59e0b;
+      --violet: #8b5cf6;
+      --brutal-border: 4px solid var(--ink);
+      --brutal-shadow: 8px 8px 0 var(--ink);
+      --brutal-shadow-sm: 5px 5px 0 var(--ink);
+      --brutal-shadow-lg: 12px 12px 0 var(--ink);
+      --radius: 18px;
+      --ease-bounce: cubic-bezier(.2, .7, .2, 1.2);
+      --ease-smooth: cubic-bezier(.2, .7, .2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+
+    body {
+      font-family: "Pretendard", "SUIT", "Segoe UI", sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 15%, #cffafe 0, #cffafe 22%, transparent 23%),
+        radial-gradient(circle at 88% 25%, #fde68a 0, #fde68a 20%, transparent 21%),
+        radial-gradient(circle at 22% 85%, #fecdd3 0, #fecdd3 22%, transparent 23%),
+        linear-gradient(140deg, #fef3c7 0%, #dbeafe 45%, #fce7f3 100%);
+      overflow: hidden;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+      padding: 14px;
+    }
+
+    /* ── Progress ── */
+    .progress-wrap {
+      border: var(--brutal-border);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: var(--brutal-shadow-sm);
+      height: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      transition: width 600ms var(--ease-smooth);
+      background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--cyan),
+        var(--lime),
+        var(--amber),
+        var(--pink)
+      );
+      background-size: 300% 100%;
+      animation: progressGlow 8s ease-in-out infinite;
+      border-radius: 999px;
+    }
+
+    @keyframes progressGlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ── Stage ── */
+    .stage {
+      position: relative;
+      border: 5px solid var(--ink);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--brutal-shadow-lg);
+      overflow: hidden;
+      background: #fff;
+      isolation: isolate;
+    }
+
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+      z-index: 1;
+    }
+
+    /* ── Slides ── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      padding: clamp(18px, 2.8vw, 40px);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 18px;
+      background: linear-gradient(165deg, rgba(255,255,255,.97), rgba(239,246,255,.96));
+      will-change: transform, opacity;
+      outline: none;
+    }
+
+    .slide.enter-right { animation: enterRight .5s var(--ease-smooth) both; }
+    .slide.enter-left  { animation: enterLeft  .5s var(--ease-smooth) both; }
+
+    @keyframes enterRight {
+      from { transform: translateX(16%) rotate(1.5deg) scale(.96); opacity: 0; }
+      to   { transform: translateX(0) rotate(0) scale(1); opacity: 1; }
+    }
+    @keyframes enterLeft {
+      from { transform: translateX(-16%) rotate(-1.5deg) scale(.96); opacity: 0; }
+      to   { transform: translateX(0) rotate(0) scale(1); opacity: 1; }
+    }
+
+    /* ── Staggered card animation ── */
+    .slide [data-anim] {
+      opacity: 0;
+      transform: translateY(22px) scale(.97);
+      animation: cardReveal .5s var(--ease-bounce) forwards;
+    }
+
+    @keyframes cardReveal {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── Kicker ── */
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: max-content;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: var(--brutal-shadow-sm);
+      padding: 10px 18px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+    }
+
+    .kicker:hover {
+      transform: translate(-2px, -2px) rotate(-1deg);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+
+    /* ── Title ── */
+    .title {
+      margin: 8px 0 0;
+      font-size: clamp(2.8rem, 6.5vw, 7rem);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+
+    .title .accent {
+      position: relative;
+      display: inline-block;
+    }
+
+    .title .accent::after {
+      content: "";
+      position: absolute;
+      bottom: .05em;
+      left: -.04em;
+      right: -.04em;
+      height: .32em;
+      background: #fde68a;
+      z-index: -1;
+      border-radius: 4px;
+      transform: rotate(-.5deg);
+    }
+
+    /* ── Name ── */
+    .name-main {
+      font-weight: 950;
+      letter-spacing: -.03em;
+    }
+
+    .name-sub {
+      font-size: .45em;
+      font-weight: 800;
+      margin-left: .18em;
+      padding: .12em .5em;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 3px 3px 0 var(--ink);
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      font-size: clamp(1.2rem, 2.2vw, 2rem);
+      font-weight: 650;
+      color: #1e293b;
+      text-wrap: pretty;
+      white-space: pre-line;
+      line-height: 1.45;
+    }
+
+    /* ── Panel ── */
+    .panel {
+      border: var(--brutal-border);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--brutal-shadow-sm);
+      padding: 16px;
+    }
+
+    /* ── Grids ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    /* ── Card ── */
+    .card {
+      border: var(--brutal-border);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--brutal-shadow-sm);
+      padding: 16px;
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+
+    .card:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--ink);
+      transition-duration: 80ms;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.22rem, 1.8vw, 2rem);
+      line-height: 1.2;
+    }
+
+    .card p,
+    .card li {
+      font-size: clamp(1rem, 1.28vw, 1.35rem);
+      line-height: 1.5;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 8px;
+    }
+
+    /* ── Agenda ── */
+    .agenda-flow {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      margin-top: 4px;
+      padding-left: 6px;
+    }
+
+    .agenda-flow::before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      top: 8px;
+      bottom: 8px;
+      width: 4px;
+      border-radius: 999px;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(15,23,42,.95),
+        rgba(15,23,42,.95) 9px,
+        rgba(15,23,42,.16) 9px,
+        rgba(15,23,42,.16) 17px
+      );
+      pointer-events: none;
+    }
+
+    .agenda-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 6px 12px 6px 8px;
+      background: #fff;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+      cursor: default;
+    }
+
+    .agenda-item:hover,
+    .agenda-item:focus-visible {
+      transform: translate(-2px, -2px) rotate(-.3deg);
+      box-shadow: 5px 5px 0 var(--ink);
+      outline: none;
+    }
+
+    .agenda-item.is-lime { background: linear-gradient(145deg, #ecfccb, #d9f99d); }
+    .agenda-item.is-pink { background: linear-gradient(145deg, #fce7f3, #fbcfe8); }
+    .agenda-item.is-cyan { background: linear-gradient(145deg, #cffafe, #a5f3fc); }
+    .agenda-item.is-amber { background: linear-gradient(145deg, #fef9c3, #fde68a); }
+    .agenda-item.is-blue { background: linear-gradient(145deg, #dbeafe, #bfdbfe); }
+
+    .agenda-order {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      font-weight: 900;
+      font-size: .85rem;
+      box-shadow: 1px 1px 0 var(--ink);
+      z-index: 1;
+    }
+
+    .agenda-text {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .agenda-text strong {
+      font-size: clamp(1.12rem, 1.3vw, 1.35rem);
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+
+    .agenda-text span {
+      font-size: clamp(.95rem, 1.05vw, 1.1rem);
+      color: #475569;
+      font-weight: 650;
+      line-height: 1.2;
+    }
+
+    .agenda-label {
+      font-size: clamp(1rem, 1.15vw, 1.18rem);
+      line-height: 1.2;
+      letter-spacing: -.01em;
+    }
+
+    .num {
+      display: inline-grid;
+      place-items: center;
+      width: 48px;
+      aspect-ratio: 1;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      background: #fde68a;
+      margin-right: 8px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      background: #fff;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: var(--brutal-shadow-sm);
+      padding: 6px;
+    }
+
+    .cover-logo {
+      width: 74px;
+      height: 74px;
+      padding: 5px;
+      border-width: 4px;
+      border-radius: 18px;
+      margin-right: 8px;
+      background: linear-gradient(145deg, #ffffff 0%, #fef3c7 45%, #dbeafe 100%);
+      box-shadow:
+        0 0 0 3px #fff,
+        0 0 0 7px var(--ink),
+        9px 9px 0 var(--ink),
+        0 0 20px rgba(34,211,238,.55);
+      transform: rotate(-6deg);
+      animation: coverLogoPunch 2.4s ease-in-out infinite;
+    }
+
+    @keyframes coverLogoPunch {
+      0%, 100% { transform: rotate(-6deg) scale(1); }
+      50% { transform: rotate(-3deg) scale(1.08); }
+    }
+
+    /* ── Instructor ── */
+    .instructor-title {
+      margin: 10px 0 0;
+      font-size: clamp(2.4rem, 5.2vw, 5.4rem);
+      line-height: 1.04;
+      letter-spacing: -.02em;
+      font-weight: 950;
+    }
+
+    .instructor-wrap {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .instructor-wrap .card { height: 100%; }
+
+    .instructor-photo {
+      width: 100%;
+      height: min(40vh, 360px);
+      object-fit: cover;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: var(--brutal-shadow-sm);
+      background: #fff;
+      transition: transform 300ms var(--ease-bounce), box-shadow 300ms ease;
+    }
+
+    .instructor-photo:hover {
+      transform: scale(1.015) rotate(-.5deg);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+
+    .instructor-meta {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .meta-pill {
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 10px 12px;
+      font-weight: 800;
+      font-size: clamp(.95rem, 1.05vw, 1.1rem);
+      line-height: 1.35;
+      transition: transform 160ms var(--ease-bounce), box-shadow 160ms ease;
+    }
+
+    .meta-pill:hover {
+      transform: translate(-2px, -2px) rotate(-1deg);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .instructor-caption {
+      margin: 6px 0 0;
+      font-size: clamp(1rem, 1.25vw, 1.22rem);
+      font-weight: 750;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    /* ── Instructor message ── */
+    .instructor-message {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .instructor-message::before {
+      content: "\201C";
+      position: absolute;
+      top: -20px;
+      left: -8px;
+      font-size: 10rem;
+      font-weight: 900;
+      color: rgba(15,23,42,.06);
+      line-height: 1;
+      pointer-events: none;
+      font-family: Georgia, serif;
+    }
+
+    .quote-text {
+      margin: 4px 0 0;
+      font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: -.01em;
+    }
+
+    .msg-sub {
+      font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .msg-main {
+      margin: 8px 0 0;
+      font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+      font-weight: 950;
+      line-height: 1.25;
+      letter-spacing: -.02em;
+    }
+
+    .highlight-mark {
+      background: linear-gradient(transparent 55%, #fde68a 55%);
+      padding: 0 4px;
+    }
+
+    .highlight-badge {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 5px 16px;
+      background: var(--ink);
+      color: #fbbf24;
+      border-radius: 10px;
+      box-shadow: 4px 4px 0 rgba(15,23,42,.25);
+      transition: transform 200ms var(--ease-bounce);
+    }
+
+    .highlight-badge:hover {
+      transform: scale(1.05) rotate(-1deg);
+    }
+
+    .point-box {
+      border-left: 5px solid var(--ink);
+      position: relative;
+    }
+
+    .point-box .underline-bold {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 1px;
+    }
+
+    /* ── Model cards ── */
+    .model-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 3px solid var(--ink);
+      background: #fff;
+      border-radius: 999px;
+      padding: 8px 12px;
+      box-shadow: var(--brutal-shadow-sm);
+      font-weight: 900;
+    }
+
+    .bar {
+      position: relative;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      height: 20px;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      position: absolute;
+      inset: 0;
+      width: 0;
+      transition: width 700ms var(--ease-smooth);
+      background: repeating-linear-gradient(
+        90deg, #22d3ee, #22d3ee 14px, #3b82f6 14px, #3b82f6 28px
+      );
+    }
+
+    /* ── Footer ── */
+    .footer {
+      border: 5px solid var(--ink);
+      border-radius: 18px;
+      box-shadow: var(--brutal-shadow-sm);
+      background: rgba(255,255,255,.96);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+
+    .btns { display: flex; gap: 8px; }
+
+    button {
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 16px;
+      font-weight: 900;
+      font-size: .95rem;
+      cursor: pointer;
+      box-shadow: var(--brutal-shadow-sm);
+      transition: transform 140ms var(--ease-bounce), box-shadow 140ms ease, background 140ms ease;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--ink);
+      background: #fef9c3;
+    }
+
+    button:active:not(:disabled) {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0 var(--ink);
+      transition-duration: 60ms;
+    }
+
+    button:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    button:focus-visible,
+    .slide:focus-visible {
+      outline: 3px solid #2563eb;
+      outline-offset: 3px;
+    }
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-block;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: clamp(.95rem, 1.1vw, 1.15rem);
+      font-weight: 900;
+      background: #fff;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 160ms var(--ease-bounce), box-shadow 160ms ease;
+    }
+
+    .tag:hover {
+      transform: translate(-2px, -2px) rotate(-1deg);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    /* ── Cover ── */
+    .cover-panel {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .cover-line {
+      font-size: clamp(1.5rem, 2.3vw, 2.25rem);
+      font-weight: 900;
+      line-height: 1.35;
+      text-wrap: balance;
+    }
+
+    /* ── Colors ── */
+    .bg-blue  { background: #bfdbfe; }
+    .bg-cyan  { background: #a5f3fc; }
+    .bg-pink  { background: #fbcfe8; }
+    .bg-lime  { background: #d9f99d; }
+    .bg-amber { background: #fde68a; }
+
+    .muted { color: #334155; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+
+    /* ── Roadmap ── */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .roadmap-item {
+      border: 4px solid var(--ink);
+      border-radius: 16px;
+      box-shadow: var(--brutal-shadow-sm);
+      padding: 14px;
+      background: #fff;
+      min-height: 190px;
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .roadmap-item:hover {
+      transform: translate(-3px, -3px) rotate(-.5deg);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+
+    .roadmap-item.is-current::before {
+      content: "NOW";
+      position: absolute;
+      top: 10px;
+      right: -24px;
+      background: var(--pink);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 900;
+      padding: 3px 28px;
+      transform: rotate(45deg);
+      border: 2px solid var(--ink);
+    }
+
+    .roadmap-month {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 1rem;
+      background: #fff;
+      box-shadow: 2px 2px 0 var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .roadmap-item h3 {
+      margin: 0 0 8px;
+      font-size: clamp(1.26rem, 1.65vw, 1.7rem);
+      line-height: 1.2;
+    }
+
+    .roadmap-item p {
+      margin: 0;
+      font-size: clamp(1rem, 1.1vw, 1.2rem);
+      line-height: 1.42;
+      font-weight: 650;
+      color: #334155;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .timeline .card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline .card::after {
+      content: "";
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 14px; height: 14px;
+      border-radius: 999px;
+      border: 3px solid var(--ink);
+      background: #fff;
+      transition: background 200ms ease;
+    }
+
+    .timeline .card:hover::after {
+      background: var(--lime);
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .about-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-badge {
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 3px 3px 0 var(--ink);
+      font-size: 1.25rem;
+      transition: transform 300ms var(--ease-bounce);
+    }
+
+    .about-card:hover .icon-badge {
+      transform: rotate(-10deg) scale(1.1);
+    }
+
+    .about-point {
+      margin-top: 8px;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    /* ── Counter animation ── */
+    .stat-num {
+      display: inline-block;
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 950;
+      letter-spacing: -.03em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: clamp(.9rem, 1vw, 1.1rem);
+      font-weight: 700;
+      color: #475569;
+      margin-top: 4px;
+    }
+
+    /* ── Model grid ── */
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .model-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .model-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .model-logo {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      background: #fff;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 6px;
+      transition: transform 300ms var(--ease-bounce);
+    }
+
+    .card:hover .model-logo {
+      transform: rotate(-5deg) scale(1.05);
+    }
+
+    .model-name {
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .model-sub {
+      font-size: clamp(1rem, 1.1vw, 1.2rem);
+      font-weight: 700;
+      color: #334155;
+      margin-top: 4px;
+    }
+
+    .model-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 8px;
+      font-size: clamp(1rem, 1.05vw, 1.2rem);
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    /* ── Practice ── */
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .step-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 230px;
+    }
+
+    .step-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-num {
+      display: inline-grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 3px solid var(--ink);
+      background: #fff;
+      font-weight: 900;
+      font-size: 1.15rem;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 200ms var(--ease-bounce), background 200ms ease;
+    }
+
+    .step-card:hover .step-num {
+      transform: rotate(-8deg) scale(1.08);
+      background: #fef9c3;
+    }
+
+    .practice-tip {
+      margin-top: 12px;
+      border: 4px dashed var(--ink);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fef9c3;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: clamp(1rem, 1.06vw, 1.15rem);
+      font-weight: 700;
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+    }
+
+    .practice-tip:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    .download-links {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .download-links a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ── Decorative stamps ── */
+    .stamp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 14px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      transform: rotate(-3deg);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    /* ── Arrow connector between timeline cards ── */
+    .arrow-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    /* ── Floating decoration ── */
+    .float-decor {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .12;
+      font-size: 6rem;
+      animation: floatBob 4s ease-in-out infinite;
+    }
+
+    @keyframes floatBob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    /* ── Keyboard hint ── */
+    .key-hint {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      z-index: 100;
+      display: flex;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 400ms ease;
+      pointer-events: none;
+    }
+
+    .key-hint.show { opacity: 1; }
+
+    .key-hint kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 3px 0 var(--ink);
+      font-weight: 900;
+      font-size: .8rem;
+      font-family: inherit;
+    }
+
+    /* ── Slide number badge ── */
+    .slide-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      display: inline-grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 3px 3px 0 var(--ink);
+      font-weight: 950;
+      font-size: .9rem;
+      opacity: .5;
+      transition: opacity 200ms ease, transform 200ms var(--ease-bounce);
+    }
+
+    .slide-badge:hover {
+      opacity: 1;
+      transform: scale(1.1) rotate(-3deg);
+    }
+
+    /* ── Security slide ── */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .security-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 12px;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+      box-shadow: var(--brutal-shadow-sm);
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+    }
+
+    .security-item:hover {
+      transform: translate(-3px, -3px) rotate(-.3deg);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+
+    .security-num {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      background: #fff;
+      font-weight: 950;
+      font-size: .95rem;
+      box-shadow: 2px 2px 0 var(--ink);
+      flex-shrink: 0;
+    }
+
+    .security-text {
+      font-size: clamp(.95rem, 1.15vw, 1.15rem);
+      font-weight: 700;
+      line-height: 1.4;
+      color: #1e293b;
+    }
+
+    .security-text .sec-bold {
+      font-weight: 900;
+      color: var(--ink);
+      background: linear-gradient(transparent 60%, #fecdd3 60%);
+      padding: 0 3px;
+    }
+
+    .security-text .sec-sub {
+      display: block;
+      margin-top: 4px;
+      font-size: .88em;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .security-banner {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 14px 20px;
+      border: 4px dashed var(--ink);
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fef9c3, #fde68a);
+      box-shadow: var(--brutal-shadow-sm);
+      font-weight: 900;
+      font-size: clamp(1rem, 1.3vw, 1.3rem);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── Prompt formula slide ── */
+    .prompt-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .prompt-formula {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border: 5px solid var(--ink);
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fef9c3 0%, #e0f2fe 50%, #fce7f3 100%);
+      box-shadow: var(--brutal-shadow);
+      flex-wrap: wrap;
+    }
+
+    .prompt-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 4px solid var(--ink);
+      border-radius: 14px;
+      font-weight: 900;
+      font-size: clamp(1.05rem, 1.4vw, 1.4rem);
+      box-shadow: var(--brutal-shadow-sm);
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+    }
+
+    .prompt-block:hover {
+      transform: translate(-3px, -3px) rotate(-1deg);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+
+    .prompt-plus {
+      font-size: 1.6rem;
+      font-weight: 950;
+      color: var(--ink);
+    }
+
+    .prompt-equals {
+      font-size: 1.6rem;
+      font-weight: 950;
+      color: var(--ink);
+    }
+
+    .prompt-result {
+      padding: 10px 20px;
+      border: 4px solid var(--ink);
+      border-radius: 14px;
+      background: var(--ink);
+      color: #fbbf24;
+      font-weight: 950;
+      font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+      box-shadow: var(--brutal-shadow-sm);
+      letter-spacing: .02em;
+    }
+
+    .prompt-card-num {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 4px solid var(--ink);
+      border-radius: 12px;
+      background: #fff;
+      font-weight: 950;
+      font-size: 1.2rem;
+      box-shadow: 3px 3px 0 var(--ink);
+      flex-shrink: 0;
+    }
+
+    .prompt-detail-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .prompt-detail-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .prompt-example {
+      margin-top: 8px;
+      padding: 12px 14px;
+      border: 3px dashed var(--ink);
+      border-radius: 12px;
+      background: rgba(255,255,255,.7);
+      font-size: clamp(.92rem, 1.05vw, 1.1rem);
+      font-weight: 700;
+      line-height: 1.5;
+      color: #334155;
+    }
+
+    .prompt-example strong {
+      color: var(--ink);
+    }
+
+    .prompt-example .prompt-em {
+      display: inline;
+      background: linear-gradient(transparent 60%, #a5f3fc 60%);
+      padding: 0 2px;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .prompt-full {
+      grid-column: 1 / -1;
+    }
+
+    .prompt-full-box {
+      margin-top: 10px;
+      padding: 16px;
+      border: 4px solid var(--ink);
+      border-radius: 16px;
+      background: linear-gradient(145deg, #f0fdf4, #ecfdf5);
+      box-shadow: var(--brutal-shadow-sm);
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      font-weight: 750;
+      line-height: 1.6;
+      color: #1e293b;
+    }
+
+    .prompt-full-box .pf-role { background: linear-gradient(transparent 60%, #fde68a 60%); padding: 0 3px; font-weight: 900; }
+    .prompt-full-box .pf-insight { background: linear-gradient(transparent 60%, #a5f3fc 60%); padding: 0 3px; font-weight: 900; }
+    .prompt-full-box .pf-tone { background: linear-gradient(transparent 60%, #fbcfe8 60%); padding: 0 3px; font-weight: 900; }
+
+    /* ── QA / Closing slide ── */
+    .qa-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+    }
+
+    .qa-hero {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 18px 24px;
+      border: 5px solid var(--ink);
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fef9c3 0%, #fbcfe8 35%, #a5f3fc 65%, #d9f99d 100%);
+      box-shadow: var(--brutal-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qa-hero::before {
+      content: "?";
+      position: absolute;
+      right: -10px;
+      top: -20px;
+      font-size: 12rem;
+      font-weight: 950;
+      color: rgba(15,23,42,.04);
+      line-height: 1;
+      pointer-events: none;
+      font-family: Georgia, serif;
+    }
+
+    .qa-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 8px,
+        rgba(255,255,255,.15) 8px,
+        rgba(255,255,255,.15) 16px
+      );
+      pointer-events: none;
+    }
+
+    .qa-hero-text {
+      font-size: clamp(1.3rem, 2.2vw, 2rem);
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: -.01em;
+    }
+
+    .qa-hero-text .qa-small {
+      display: block;
+      font-size: .7em;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 4px;
+    }
+
+    .next-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+
+    .next-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .next-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 900;
+      font-size: .85rem;
+      letter-spacing: .03em;
+      box-shadow: 3px 3px 0 rgba(15,23,42,.2);
+    }
+
+    .next-badge .arrow-icon {
+      display: inline-block;
+      animation: arrowPulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes arrowPulse {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
+
+    .next-keyword {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+    }
+
+    .next-keyword:hover {
+      transform: translate(-2px, -2px) rotate(-1deg);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .next-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .recap-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .recap-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 3px 3px 0 var(--ink);
+      font-weight: 750;
+      font-size: clamp(.95rem, 1.1vw, 1.12rem);
+      line-height: 1.3;
+      transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+    }
+
+    .recap-item:hover {
+      transform: translate(-2px, -2px) rotate(-.5deg);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .recap-check {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      font-size: .85rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: background 300ms ease, transform 300ms var(--ease-bounce);
+    }
+
+    .recap-item.checked .recap-check {
+      background: var(--lime);
+      transform: scale(1.05) rotate(-3deg);
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(167, 243, 208, .45) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(191, 219, 254, .45) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(254, 243, 199, .5) 0%, transparent 60%),
+        rgba(255, 255, 255, .82);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 350ms ease;
+      cursor: pointer;
+    }
+
+    .lightbox.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .lightbox-img {
+      width: min(75vw, 380px);
+      height: auto;
+      border: 5px solid var(--ink);
+      border-radius: 32px;
+      box-shadow:
+        var(--brutal-shadow-lg),
+        0 0 0 8px rgba(255,255,255,.7),
+        0 20px 50px rgba(15, 23, 42, .1);
+      background: linear-gradient(145deg, #ffffff, #fef9c3, #e0f2fe);
+      padding: 20px;
+      object-fit: contain;
+      transform: scale(.8) translateY(20px);
+      transition: transform 450ms var(--ease-bounce);
+    }
+
+    .lightbox.is-open .lightbox-img {
+      transform: scale(1) translateY(0);
+    }
+
+    .lightbox-label {
+      padding: 10px 22px;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: var(--brutal-shadow-sm);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--ink);
+      letter-spacing: .01em;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: transform 400ms var(--ease-bounce) 150ms, opacity 300ms ease 150ms;
+    }
+
+    .lightbox.is-open .lightbox-label {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .lightbox-hint {
+      position: absolute;
+      bottom: clamp(16px, 3vh, 36px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, .06);
+      font-weight: 700;
+      font-size: .82rem;
+      color: #94a3b8;
+      pointer-events: none;
+    }
+
+    .cover-logo {
+      cursor: pointer;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 980px) {
+      .grid-4, .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .model-grid { grid-template-columns: 1fr; }
+      .roadmap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .practice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 700px) {
+      .app { padding: 10px; gap: 10px; }
+      .grid-4, .grid-3, .grid-2, .timeline, .about-grid, .roadmap-grid, .practice-grid, .qa-layout, .security-grid, .prompt-layout { grid-template-columns: 1fr; }
+      .prompt-formula { flex-direction: column; }
+      .prompt-full, .prompt-full { grid-column: 1; }
+      .qa-layout { grid-template-rows: auto auto auto; }
+      .qa-hero { grid-column: 1; flex-direction: column; text-align: center; }
+      .instructor-wrap, .instructor-meta { grid-template-columns: 1fr; }
+      .slide { padding: 14px; }
+      .footer { flex-wrap: wrap; }
+      .key-hint { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div id="progressWrap" class="progress-wrap" role="progressbar" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1" aria-valuetext="1 / 12">
+      <div id="progress" class="progress"></div>
+    </div>
+
+    <main class="stage" aria-live="polite">
+      <section id="slide" class="slide" tabindex="0"></section>
+      <div id="sr" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    </main>
+
+    <footer class="footer">
+      <div class="brand">
+        <img class="logo" src="img/grae-i_logo.png" alt="고래.I 로고" />
+        <span>고래.I 오리엔테이션 2026</span>
+        <span id="counter" class="tag bg-cyan">1 / 12</span>
+      </div>
+      <div class="btns">
+        <button id="prev" aria-label="이전 슬라이드">← 이전</button>
+        <button id="next" aria-label="다음 슬라이드">다음 →</button>
+      </div>
+    </footer>
+  </div>
+
+  <div id="lightbox" class="lightbox" aria-label="로고 확대 보기">
+    <div class="lightbox-inner">
+      <img class="lightbox-img" src="img/grae-i_logo.png" alt="고래.I 로고 확대" />
+      <span class="lightbox-label">고래.I — 울산 교육청 AI 학습 연구 동아리</span>
+    </div>
+    <span class="lightbox-hint">아무 곳이나 클릭하면 닫힙니다</span>
+  </div>
+
+  <div id="keyHint" class="key-hint">
+    <kbd>←</kbd><kbd>→</kbd>
+  </div>
+
+  <script>
+    const slides = [
+      {
+        id: "s1-cover",
+        render: () => `
+          <div>
+            <span class="kicker bg-amber" data-anim style="animation-delay:0ms">🐳 AI와 첫 만남</span>
+            <h1 class="title" data-anim style="animation-delay:80ms">오리엔테이션<br><span class="accent">고래.I</span></h1>
+            <p class="subtitle" data-anim style="animation-delay:160ms">2026년 3월 | 울산광역시교육청\n기초반 A·B (각 49명) | 2시간 수업</p>
+          </div>
+          <div class="panel bg-cyan cover-panel" data-anim style="animation-delay:240ms">
+            <div class="meta">
+              <img class="logo cover-logo" src="img/grae-i_logo.png" alt="고래.I 로고" />
+              <span class="tag bg-lime">기초반 A·B</span>
+              <span class="tag bg-pink">총 98명</span>
+              <span class="tag bg-amber">2시간 오리엔테이션</span>
+              <span class="tag bg-blue">기초반 A — 정책관, 공보담당관, 교육국(7개 부서)</span>
+              <span class="tag bg-cyan">기초반 B — 감사관, 교육협력담당관, 행정국(6개 부서)</span>
+            </div>
+            <div class="cover-line">
+              AI를 <span class="tag bg-amber">실제 업무</span>에 바로 연결하는<br>
+              울산 교육청 <span class="highlight-mark">실전 AI 학습</span> 연구 동아리
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "s2-agenda",
+        render: () => `
+          <div>
+            <span class="kicker bg-amber" data-anim style="animation-delay:0ms">오늘의 운영</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">오늘은 <span class="accent">이렇게</span> 진행합니다</h2>
+          </div>
+          <div class="grid-2">
+            <article class="card bg-blue" data-anim style="animation-delay:120ms">
+              <h3><span class="num">1</span>수업 진행 순서</h3>
+              <div class="agenda-flow" aria-label="수업 진행 순서">
+                <div class="agenda-item is-lime" tabindex="0">
+                  <span class="agenda-order">1</span>
+                  <div class="agenda-text">
+                    <strong>동아리 소개</strong>
+                    <span>목적과 운영 방향 공유</span>
+                  </div>
+                </div>
+                <div class="agenda-item is-pink" tabindex="0">
+                  <span class="agenda-order">2</span>
+                  <div class="agenda-text">
+                    <strong>강사 소개</strong>
+                    <span>수업 스타일과 포인트 안내</span>
+                  </div>
+                </div>
+                <div class="agenda-item is-cyan" tabindex="0">
+                  <span class="agenda-order">3</span>
+                  <div class="agenda-text">
+                    <strong>연간 로드맵</strong>
+                    <span>월별 학습 흐름 한눈에 정리</span>
+                  </div>
+                </div>
+                <div class="agenda-item is-amber" tabindex="0">
+                  <span class="agenda-order">4</span>
+                  <div class="agenda-text">
+                    <strong>AI 3대장</strong>
+                    <span>도구별 선택 기준 비교</span>
+                  </div>
+                </div>
+                <div class="agenda-item is-pink" tabindex="0">
+                  <span class="agenda-order">5</span>
+                  <div class="agenda-text">
+                    <strong>만능 프롬프트 3요소</strong>
+                    <span>역할 + 인사이트 + 반말 톤</span>
+                  </div>
+                </div>
+                <div class="agenda-item is-blue" tabindex="0">
+                  <span class="agenda-order">6</span>
+                  <div class="agenda-text">
+                    <strong>실습: 업무보고서 쓰기</strong>
+                    <span>실제 문서 초안 바로 만들기</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="card bg-amber" data-anim style="animation-delay:200ms">
+              <h3><span class="num">2</span>진행 방식</h3>
+              <p>각 세션은 <strong>핵심 설명 → 데모 → 업무 적용 포인트</strong> 정리 순서로 진행합니다.</p>
+              <div class="meta">
+                <span class="tag bg-cyan">순서 중심</span>
+                <span class="tag bg-lime">실습 중심</span>
+                <span class="tag bg-pink">업무보고서 연결</span>
+              </div>
+            </article>
+          </div>
+        `
+      },
+      {
+        id: "s3-about",
+        render: () => `
+          <div>
+            <span class="kicker bg-lime" data-anim style="animation-delay:0ms">고래.I는 이런 동아리입니다</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">목적 & 성장 · 구성 & 목표</h2>
+          </div>
+          <div class="about-grid">
+            <article class="card bg-blue about-card" data-anim style="animation-delay:120ms">
+              <h3><span class="icon-badge">🎯</span>목적</h3>
+              <p class="muted">단순한 이론이 아니라, 업무에 AI를 실제로 활용하는 방법을 익히는 실전형 학습 연구 모임</p>
+              <p class="about-point"><span class="highlight-mark">핵심: "바로 써먹는 AI"</span></p>
+            </article>
+            <article class="card bg-lime about-card" data-anim style="animation-delay:180ms">
+              <h3><span class="icon-badge">📈</span>성장</h3>
+              <p class="muted">2025년 26명 → 2026년 <span class="stat-num" data-count="109">0</span>명</p>
+              <p class="muted">1년 만에 <strong>4배 이상</strong> 성장</p>
+              <p class="about-point"><span class="highlight-mark">핵심: 빠른 확장 + 높은 참여도</span></p>
+            </article>
+            <article class="card bg-pink about-card" data-anim style="animation-delay:240ms">
+              <h3><span class="icon-badge">🏢</span>구성</h3>
+              <p class="muted">기초반 <strong>98명</strong>(90%), 심화반 <strong>11명</strong>(10%)</p>
+              <p class="muted">총 <strong>17개</strong> 부서 참여</p>
+              <p class="about-point"><span class="highlight-mark">핵심: 조직 전반으로 확산</span></p>
+            </article>
+            <article class="card bg-amber about-card" data-anim style="animation-delay:300ms">
+              <h3><span class="icon-badge">🏆</span>목표</h3>
+              <p class="muted">10월 AI챔피언 그린 인증 <strong>전원 합격</strong> 목표</p>
+              <p class="about-point"><span class="highlight-mark">핵심: 전원 합격 + 실무 정착</span></p>
+            </article>
+          </div>
+        `
+      },
+      {
+        id: "s4-instructor",
+        render: () => `
+          <div>
+            <span class="kicker bg-lime" data-anim style="animation-delay:0ms">강사 소개</span>
+            <h2 class="instructor-title" data-anim style="animation-delay:60ms"><span class="name-main">이홍우</span><span class="name-sub">주무관</span></h2>
+            <p class="instructor-caption" data-anim style="animation-delay:100ms">울산광역시교육청 정책관실 정책기획팀 · 고래.I 강사 및 운영 기획 총괄</p>
+          </div>
+          <div class="instructor-wrap">
+            <article class="card bg-cyan" data-anim style="animation-delay:140ms">
+              <img class="instructor-photo" src="img/leehongwoo.jpeg" alt="이홍우 주무관 사진" />
+              <div class="instructor-meta">
+                <div class="meta-pill bg-lime">울산 최초 AI챔피언 블루 인증</div>
+                <div class="meta-pill bg-cyan">교육부 주관 2026 교육행정 데이터 리더 위촉</div>
+                <div class="meta-pill bg-pink">AI 활용 교육 콘텐츠 전문 제작</div>
+                <div class="meta-pill bg-amber">공공업무 기반 실전 AI 코칭</div>
+              </div>
+            </article>
+            <article class="card bg-amber instructor-message" data-anim style="animation-delay:220ms">
+              <div>
+                <h3>메시지</h3>
+                <p class="msg-sub">AI는 도구일 뿐,</p>
+                <p class="msg-main">여러분의 <span class="highlight-mark">업무 전문성</span>이<br><span class="highlight-badge">진짜 힘</span>입니다.</p>
+              </div>
+              <div class="panel bg-lime point-box">
+                <strong style="font-size:1.05rem;">오늘 포인트</strong>
+                <p class="muted" style="margin-top:6px; font-weight:600;">도구 사용법보다 중요한 건,<br>여러분 <strong class="underline-bold">업무 맥락에 맞는 질문 설계</strong>입니다.</p>
+              </div>
+            </article>
+          </div>
+        `
+      },
+      {
+        id: "s5-roadmap",
+        render: () => `
+          <div>
+            <span class="kicker bg-pink" data-anim style="animation-delay:0ms">2026 연간 로드맵</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">월별 학습 <span class="accent">로드맵</span></h2>
+          </div>
+          <div class="roadmap-grid">
+            <article class="roadmap-item bg-amber is-current" data-anim style="animation-delay:100ms"><span class="roadmap-month">3월</span><h3>AI와 첫 만남</h3><p>오리엔테이션 · 도구 이해 · 학습 방향 설정</p></article>
+            <article class="roadmap-item bg-pink" data-anim style="animation-delay:150ms"><span class="roadmap-month">4월</span><h3>프롬프트 & 컨텍스트 엔지니어링</h3><p>질문 설계 · 맥락 주입 · 결과 품질 끌어올리기</p></article>
+            <article class="roadmap-item bg-blue" data-anim style="animation-delay:200ms"><span class="roadmap-month">5월</span><h3>업무 문서 작성</h3><p>실무 보고서 · 공문 초안 · 요약 자동화</p></article>
+            <article class="roadmap-item bg-cyan" data-anim style="animation-delay:250ms"><span class="roadmap-month">6월</span><h3>데이터와 AI</h3><p>표 해석 · 인사이트 도출 · 근거 기반 작성</p></article>
+            <article class="roadmap-item bg-lime" data-anim style="animation-delay:300ms"><span class="roadmap-month">7월</span><h3>상반기 성과 공유</h3><p>우수 사례 발표 · 시행착오 공유 · 개선안 정리</p></article>
+            <article class="roadmap-item bg-cyan" data-anim style="animation-delay:350ms"><span class="roadmap-month">8월</span><h3>AI 활용 확장</h3><p>도구 연계 · 심화 활용 · 부서 맞춤 적용</p></article>
+            <article class="roadmap-item bg-amber" data-anim style="animation-delay:400ms"><span class="roadmap-month">9-10월</span><h3>AI챔피언 인증</h3><p>인증 준비 · 실전 문제 풀이 · 전원 합격 도전</p></article>
+            <article class="roadmap-item bg-lime" data-anim style="animation-delay:450ms"><span class="roadmap-month">11-12월</span><h3>프로젝트 발표</h3><p>성과 공유 · 확산 계획 · 다음 연도 로드맵</p></article>
+          </div>
+        `
+      },
+      {
+        id: "s6-security",
+        render: () => `
+          <div>
+            <span class="kicker bg-pink" data-anim style="animation-delay:0ms">수업 전 필수 안내</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">생성형 AI 활용 <span class="accent">보안수칙</span></h2>
+          </div>
+          <div class="security-grid">
+            <div class="security-item bg-pink" data-anim style="animation-delay:100ms">
+              <span class="security-num">01</span>
+              <div class="security-text">
+                민감한 정보(비공개 정보, 개인정보 등) <span class="sec-bold">입력 금지</span>
+                <span class="sec-sub">* 설정에서 '대화 이력&학습' 기능 비활성화</span>
+              </div>
+            </div>
+            <div class="security-item bg-cyan" data-anim style="animation-delay:160ms">
+              <span class="security-num">02</span>
+              <div class="security-text">
+                생성물에 대한 <span class="sec-bold">정확성·윤리성·적합성</span> 등 재검증
+              </div>
+            </div>
+            <div class="security-item bg-amber" data-anim style="animation-delay:220ms">
+              <span class="security-num">03</span>
+              <div class="security-text">
+                가짜뉴스 유포·불법물 제작·해킹 등 <span class="sec-bold">범죄에 악용 금지</span>
+              </div>
+            </div>
+            <div class="security-item bg-lime" data-anim style="animation-delay:280ms">
+              <span class="security-num">04</span>
+              <div class="security-text">
+                생성물 활용 시 지적 재산권·저작권 등 <span class="sec-bold">법률 침해·위반 여부 확인</span>
+              </div>
+            </div>
+            <div class="security-item bg-blue" data-anim style="animation-delay:340ms">
+              <span class="security-num">05</span>
+              <div class="security-text">
+                악의적으로 거짓 정보를 입력·학습 유도하는 등 <span class="sec-bold">비윤리적 활용 금지</span>
+              </div>
+            </div>
+            <div class="security-item bg-pink" data-anim style="animation-delay:400ms">
+              <span class="security-num">06</span>
+              <div class="security-text">
+                연계·확장프로그램 사용 시 보안 취약여부 등 <span class="sec-bold">안전성 확인</span>
+              </div>
+            </div>
+            <div class="security-item bg-cyan" data-anim style="animation-delay:460ms">
+              <span class="security-num">07</span>
+              <div class="security-text">
+                로그인 계정에 대한 <span class="sec-bold">보안설정 강화 및 보안관리 철저</span>
+                <span class="sec-sub">* 다중 인증(Multi-Factor Authentication) 설정 등</span>
+              </div>
+            </div>
+            <div class="security-banner" data-anim style="animation-delay:520ms">
+              공공업무에 AI를 활용할 때, 보안수칙을 지키는 것이 가장 먼저입니다.
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "s6-aiintro",
+        render: () => `
+          <div>
+            <span class="kicker bg-pink" data-anim style="animation-delay:0ms">AI 3대장</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">하나만 쓰면 비효율,<br><span class="accent">같이 쓰면</span> 생산성</h2>
+            <p class="subtitle" data-anim style="animation-delay:120ms">Gemini · Claude · GPT는 경쟁 관계이면서 동시에 역할이 다른 도구입니다.</p>
+          </div>
+          <div class="model-grid">
+            <article class="card bg-blue model-card" data-anim style="animation-delay:180ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/gemini_logo.png" alt="Gemini 로고" />
+                <div>
+                  <div class="model-name">Gemini</div>
+                  <div class="model-sub">멀티모달 분석 특화</div>
+                </div>
+              </div>
+              <ul class="model-list">
+                <li>이미지·차트·스크린샷 맥락 파악이 빠름</li>
+                <li>영상/문서 기반 핵심 포인트 추출에 강함</li>
+                <li>대용량 자료를 한 번에 읽고 구조화하기 유리</li>
+              </ul>
+            </article>
+            <article class="card bg-amber model-card" data-anim style="animation-delay:260ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/claude_logo.png" alt="Claude 로고" />
+                <div>
+                  <div class="model-name">Claude</div>
+                  <div class="model-sub">지시 이행 · 문서 완성도 특화</div>
+                </div>
+              </div>
+              <ul class="model-list">
+                <li>업무 톤에 맞는 자연스러운 보고서 작성</li>
+                <li>복잡한 단계 지시를 누락 없이 수행</li>
+                <li>도구 연계 작업에서 순차 처리 능력이 뛰어남</li>
+              </ul>
+            </article>
+            <article class="card bg-lime model-card" data-anim style="animation-delay:340ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/chatgpt_logo.png" alt="ChatGPT 로고" />
+                <div>
+                  <div class="model-name">GPT</div>
+                  <div class="model-sub">범용 시작점 · 확장 생태계</div>
+                </div>
+              </div>
+              <ul class="model-list">
+                <li>처음 아이디어 정리와 초안 생성이 빠름</li>
+                <li>다양한 서비스 연동 및 확장 옵션 보유</li>
+                <li>어떤 작업이든 무난한 첫 시도로 적합</li>
+              </ul>
+            </article>
+          </div>
+        `
+      },
+      {
+        id: "s7-choice",
+        render: () => `
+          <div>
+            <span class="kicker bg-cyan" data-anim style="animation-delay:0ms">맞춤형 선택</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">작업 유형별 <span class="accent">모델 선택</span> 기준</h2>
+            <p class="subtitle" data-anim style="animation-delay:120ms">모델을 바꿔 쓰면 같은 시간에 더 정확한 결과를 얻을 수 있습니다.</p>
+          </div>
+          <div class="model-grid">
+            <article class="card bg-lime model-card" data-anim style="animation-delay:180ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/chatgpt_logo.png" alt="ChatGPT 로고" />
+                <div>
+                  <div class="model-name">GPT</div>
+                  <div class="model-sub">탐색·브레인스토밍 시작점</div>
+                </div>
+              </div>
+              <div class="meta">
+                <span class="tag bg-cyan">추천: 문제 정의/초안</span>
+                <span class="tag bg-amber">강점: 빠른 출발</span>
+              </div>
+              <p class="muted">무엇을 시킬지 모를 때 먼저 방향을 잡고, 이후 전문 모델로 넘기기 좋습니다.</p>
+            </article>
+            <article class="card bg-amber model-card" data-anim style="animation-delay:260ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/claude_logo.png" alt="Claude 로고" />
+                <div>
+                  <div class="model-name">Claude</div>
+                  <div class="model-sub">실무 문서·절차형 작업</div>
+                </div>
+              </div>
+              <div class="meta">
+                <span class="tag bg-lime">추천: 보고서/기획서</span>
+                <span class="tag bg-pink">강점: 지시 이행</span>
+              </div>
+              <p class="muted">형식, 톤, 분량 기준이 명확한 업무에서 완성도 높은 결과를 안정적으로 만듭니다.</p>
+            </article>
+            <article class="card bg-blue model-card" data-anim style="animation-delay:340ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/gemini_logo.png" alt="Gemini 로고" />
+                <div>
+                  <div class="model-name">Gemini</div>
+                  <div class="model-sub">이미지·영상·장문 분석</div>
+                </div>
+              </div>
+              <div class="meta">
+                <span class="tag bg-amber">추천: 시각자료 해석</span>
+                <span class="tag bg-lime">강점: 문맥 파악</span>
+              </div>
+              <p class="muted">차트·이미지·영상·긴 문서가 섞인 과업에서 핵심 근거를 빠르게 뽑아낼 수 있습니다.</p>
+            </article>
+          </div>
+        `
+      },
+      {
+        id: "s8-guide",
+        render: () => `
+          <div>
+            <span class="kicker bg-amber" data-anim style="animation-delay:0ms">상황별 실전 가이드</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">업무 상황에 맞는 <span class="accent">최적 모델</span></h2>
+          </div>
+          <div class="grid-2">
+            <article class="card bg-blue" data-anim style="animation-delay:120ms"><h3>이미지·영상 해석 <span class="stamp bg-cyan">Gemini</span></h3><p>사진 속 텍스트, 차트 의미, 영상 핵심 장면을 빠르게 추출</p></article>
+            <article class="card bg-cyan" data-anim style="animation-delay:170ms"><h3>장문 문서 리뷰 <span class="stamp bg-blue">Gemini</span></h3><p>긴 보고서·자료집에서 핵심 논점과 근거를 구조화</p></article>
+            <article class="card bg-amber" data-anim style="animation-delay:220ms"><h3>보고서/기획서 작성 <span class="stamp bg-pink">Claude</span></h3><p>문체와 형식을 지켜 자연스럽고 설득력 있는 문서 생성</p></article>
+            <article class="card bg-pink" data-anim style="animation-delay:270ms"><h3>단계형 업무 자동화 <span class="stamp bg-amber">Claude</span></h3><p>지시 순서를 따라 자료 읽기 → 정리 → 초안 작성까지 수행</p></article>
+            <article class="card bg-lime" data-anim style="animation-delay:320ms"><h3>초기 방향 탐색 <span class="stamp bg-cyan">GPT</span></h3><p>아이디어 정리, 질문 프레임 구성, 작업 초안 도출에 적합</p></article>
+            <article class="card bg-amber" data-anim style="animation-delay:370ms"><h3>연동·확장 활용 <span class="stamp bg-lime">GPT</span></h3><p>외부 서비스 연결과 확장형 워크플로우 설계에 유리</p></article>
+          </div>
+        `
+      },
+      {
+        id: "s9-matrix",
+        render: () => `
+          <div>
+            <span class="kicker bg-cyan" data-anim style="animation-delay:0ms">완벽 비교 프레임</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">AI 3대장 <span class="accent">선택 매트릭스</span></h2>
+            <p class="subtitle" data-anim style="animation-delay:120ms">작업 입력 형태와 원하는 출력 기준으로 모델을 고르면 실패율이 크게 줄어듭니다.</p>
+          </div>
+          <div class="model-grid">
+            <article class="card bg-blue model-card" data-anim style="animation-delay:180ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/gemini_logo.png" alt="Gemini 로고" />
+                <div>
+                  <div class="model-name">Gemini 우선 선택</div>
+                  <div class="model-sub">입력 데이터가 복합적일 때</div>
+                </div>
+              </div>
+              <ul class="model-list">
+                <li><strong>입력:</strong> 이미지 + 문서 + 영상이 함께 있을 때</li>
+                <li><strong>목표:</strong> 핵심 근거 추출, 비교 분석, 빠른 요약</li>
+                <li><strong>산출물:</strong> 분석 노트, 인사이트 표, 근거 목록</li>
+              </ul>
+            </article>
+            <article class="card bg-amber model-card" data-anim style="animation-delay:260ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/claude_logo.png" alt="Claude 로고" />
+                <div>
+                  <div class="model-name">Claude 우선 선택</div>
+                  <div class="model-sub">출력 완성도가 중요할 때</div>
+                </div>
+              </div>
+              <ul class="model-list">
+                <li><strong>입력:</strong> 지시 조건, 문서 양식, 대상 독자 정보</li>
+                <li><strong>목표:</strong> 자연스러운 문장, 논리적 흐름, 형식 준수</li>
+                <li><strong>산출물:</strong> 보고서, 기획서, 공문 초안</li>
+              </ul>
+            </article>
+            <article class="card bg-lime model-card" data-anim style="animation-delay:340ms">
+              <div class="model-head">
+                <img class="model-logo" src="img/chatgpt_logo.png" alt="ChatGPT 로고" />
+                <div>
+                  <div class="model-name">GPT 우선 선택</div>
+                  <div class="model-sub">문제 정의가 먼저일 때</div>
+                </div>
+              </div>
+              <ul class="model-list">
+                <li><strong>입력:</strong> 아직 정리되지 않은 요구사항</li>
+                <li><strong>목표:</strong> 질문 구조화, 작업 쪼개기, 빠른 초안</li>
+                <li><strong>산출물:</strong> 실행 체크리스트, 초안 프롬프트 세트</li>
+              </ul>
+            </article>
+          </div>
+        `
+      },
+      {
+        id: "s10-workflow",
+        render: () => `
+          <div>
+            <span class="kicker bg-lime" data-anim style="animation-delay:0ms">실전 워크플로우</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">AI 3대장 <span class="accent">협업</span> 운영법</h2>
+            <p class="subtitle" data-anim style="animation-delay:120ms">한 모델로 끝내기보다 단계별로 역할을 분담하면 결과 품질이 안정적으로 올라갑니다.</p>
+          </div>
+          <div class="timeline">
+            <article class="card bg-lime" data-anim style="animation-delay:180ms">
+              <h3>1단계 · GPT</h3>
+              <p>문제 정의, 요구사항 정리, 초안 프롬프트 설계</p>
+            </article>
+            <article class="card bg-blue" data-anim style="animation-delay:260ms">
+              <h3>2단계 · Gemini</h3>
+              <p>문서·차트·이미지·영상 근거를 분석해 핵심 확보</p>
+            </article>
+            <article class="card bg-amber" data-anim style="animation-delay:340ms">
+              <h3>3단계 · Claude</h3>
+              <p>분석 근거를 바탕으로 보고서/기획서 완성본 작성</p>
+            </article>
+            <article class="card bg-pink" data-anim style="animation-delay:420ms">
+              <h3>4단계 · 교차 검토</h3>
+              <p>다른 모델로 사실관계와 논리 흐름을 재검증</p>
+            </article>
+          </div>
+          <div class="practice-tip" data-anim style="animation-delay:500ms">TIP: <strong>문제 정의(GPT) → 근거 확보(Gemini) → 문서 완성(Claude)</strong> 순서로 운영하면 실무 품질이 빠르게 안정화됩니다.</div>
+        `
+      },
+      {
+        id: "s11-prompt",
+        render: () => `
+          <div>
+            <span class="kicker bg-amber" data-anim style="animation-delay:0ms">실습 전 핵심</span>
+            <h2 class="title" data-anim style="animation-delay:60ms"><span class="accent">만능 프롬프트</span> 3요소</h2>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:auto auto; gap:10px;">
+            <div class="prompt-formula" data-anim style="animation-delay:100ms; grid-column:1/-1;">
+              <span class="prompt-block bg-amber">역할 부여</span>
+              <span class="prompt-plus">+</span>
+              <span class="prompt-block bg-cyan">인사이트 → 최적안</span>
+              <span class="prompt-plus">+</span>
+              <span class="prompt-block bg-pink">반말 톤</span>
+              <span class="prompt-equals">=</span>
+              <span class="prompt-result">만능 프롬프트</span>
+            </div>
+
+            <article class="card bg-amber prompt-detail-card" data-anim style="animation-delay:180ms">
+              <h3><span class="prompt-card-num">1</span>역할 부여</h3>
+              <p>AI에게 <strong>전문가 역할</strong>을 먼저 부여하면 답변의 깊이가 올라갑니다.</p>
+              <div class="prompt-example">
+                "너는 <span class="prompt-em">20년차 교육행정 전문가</span>야. 정책 보고서를 검토하고 개선안을 제시하는 역할이야."
+              </div>
+            </article>
+
+            <article class="card bg-cyan prompt-detail-card" data-anim style="animation-delay:250ms">
+              <h3><span class="prompt-card-num">2</span>인사이트 → 최적안</h3>
+              <p><strong>여러 관점</strong>에서 아이디어를 뽑은 뒤 <strong>최적의 안</strong>을 골라달라고 요청합니다.</p>
+              <div class="prompt-example">
+                "<span class="prompt-em">5가지 이상 개선 방향</span>을 도출하고, 실현 가능성과 효과 기준으로 <span class="prompt-em">최적안 1개</span>를 추천해."
+              </div>
+            </article>
+
+            <article class="card bg-pink prompt-detail-card" data-anim style="animation-delay:320ms">
+              <h3><span class="prompt-card-num">3</span>반말 톤 지정</h3>
+              <p>2024년 연구(Yin et al.)에 따르면 <strong>직접적이고 간결한 톤</strong>이 과도한 존댓말보다 LLM 성능이 높습니다.</p>
+              <div class="prompt-example">
+                <span class="prompt-em">핵심만 짧게</span> 지시하면 수식어·인사가 사라지고 정확한 답변을 받을 수 있습니다.
+              </div>
+            </article>
+
+            <div data-anim style="animation-delay:400ms; grid-column:1/-1;">
+              <div class="practice-tip" style="border-style:solid; background:linear-gradient(145deg, #f0fdf4, #ecfdf5);">
+                <strong>조합 예시 — 바로 복사해서 써보세요:</strong>
+                <div class="prompt-full-box" style="margin-top:8px;">
+                  "너는 <span class="pf-role">울산광역시교육청 정책기획 전문관</span>이야.
+                  이 안건에 대해 <span class="pf-insight">다양한 관점에서 5가지 이상 인사이트를 도출</span>하고,
+                  그중 <span class="pf-insight">실현 가능성과 효과가 가장 높은 최적안 1개</span>를 골라서 추천해."
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "s11-practice",
+        render: () => `
+          <div>
+            <span class="kicker bg-lime" data-anim style="animation-delay:0ms">실습 시간</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">Claude 스킬 실습: <span class="accent">use-hwpx</span>로 보고서 만들기</h2>
+          </div>
+          <div class="practice-grid">
+            <article class="card bg-blue step-card" data-anim style="animation-delay:120ms">
+              <div class="step-title"><span class="step-num">1</span><h3>Claude 접속</h3></div>
+              <p>claude.ai 접속 후 로그인하고 새 채팅 화면 준비</p>
+            </article>
+            <article class="card bg-cyan step-card" data-anim style="animation-delay:190ms">
+              <div class="step-title"><span class="step-num">2</span><h3>GitHub에서 use-hwpx 다운로드</h3></div>
+              <p>리포지토리에서 스킬 파일을 내려받아 로컬에 저장</p>
+              <div class="download-links">
+                <a class="tag bg-amber" href="https://github.com/niaeee/use-hwpx" target="_blank" rel="noopener noreferrer">GitHub 열기</a>
+                <a class="tag bg-lime" href="https://github.com/niaeee/use-hwpx/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer">ZIP 다운로드</a>
+              </div>
+            </article>
+            <article class="card bg-amber step-card" data-anim style="animation-delay:260ms">
+              <div class="step-title"><span class="step-num">3</span><h3>Claude 스킬<br>등록</h3></div>
+              <p>다운받은 use-hwpx를 Claude에 등록하고 동작 확인</p>
+            </article>
+            <article class="card bg-pink step-card" data-anim style="animation-delay:330ms">
+              <div class="step-title"><span class="step-num">4</span><h3>보고서 작성 실행</h3></div>
+              <p>실습 프롬프트로 문서 생성 요청 후 초안 생성</p>
+            </article>
+            <article class="card bg-lime step-card" data-anim style="animation-delay:400ms">
+              <div class="step-title"><span class="step-num">5</span><h3>결과 확인 · 수정</h3></div>
+              <p>결과를 검토하고 문체/구조/근거를 대화로 보정</p>
+            </article>
+          </div>
+          <div class="practice-tip" data-anim style="animation-delay:470ms">TIP: 같은 요청도 <strong>컨텍스트(배경/목표/형식)</strong>를 더하면 결과 품질이 눈에 띄게 올라갑니다.</div>
+        `
+      },
+      {
+        id: "s12-anti-graffiti",
+        render: () => `
+          <div>
+            <span class="kicker bg-cyan" data-anim style="animation-delay:0ms">실습 시간 2</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">Google <span class="accent">Anti-Graffiti</span>로 업무보고서 만들기</h2>
+          </div>
+          <div class="practice-grid">
+            <article class="card bg-cyan step-card" data-anim style="animation-delay:120ms">
+              <div class="step-title"><span class="step-num">1</span><h3>GitHub에서 스킬 다운로드</h3></div>
+              <p>Anti-Graffiti 리포지토리에서 스킬 파일을 내려받기</p>
+              <div class="download-links">
+                <a class="tag bg-amber" href="https://github.com/niaeee/anti_use-hwpx" target="_blank" rel="noopener noreferrer">GitHub 열기</a>
+                <a class="tag bg-lime" href="https://github.com/niaeee/anti_use-hwpx/raw/main/use-hwpx-main.zip" target="_blank" rel="noopener noreferrer">ZIP 다운로드</a>
+              </div>
+            </article>
+            <article class="card bg-blue step-card" data-anim style="animation-delay:190ms">
+              <div class="step-title"><span class="step-num">2</span><h3>Anti-Graffiti 설치</h3></div>
+              <p>다운받은 파일을 압축 해제하고 Anti-Graffiti를 설치</p>
+              <div class="download-links">
+                <a class="tag bg-pink" href="https://antigravity.google/download" target="_blank" rel="noopener noreferrer">Anti-Graffiti 설치</a>
+              </div>
+            </article>
+            <article class="card bg-amber step-card" data-anim style="animation-delay:260ms">
+              <div class="step-title"><span class="step-num">3</span><h3>Google 계정<br>로그인</h3></div>
+              <p>구글 계정으로 로그인하여 서비스 연동 완료</p>
+            </article>
+            <article class="card bg-pink step-card" data-anim style="animation-delay:330ms">
+              <div class="step-title"><span class="step-num">4</span><h3>업무보고서 생성</h3></div>
+              <p>실습 프롬프트로 업무보고서 초안을 자동 생성</p>
+            </article>
+            <article class="card bg-lime step-card" data-anim style="animation-delay:400ms">
+              <div class="step-title"><span class="step-num">5</span><h3>결과 확인 · 수정</h3></div>
+              <p>생성된 보고서를 검토하고 내용을 보정</p>
+            </article>
+          </div>
+          <div class="practice-tip" data-anim style="animation-delay:470ms">TIP: Google 계정 연동 후에는 <strong>Google Docs와 연계한 문서 편집</strong>도 가능합니다.</div>
+        `
+      },
+      {
+        id: "s13-qa",
+        render: () => `
+          <div>
+            <span class="kicker bg-pink" data-anim style="animation-delay:0ms">Q & A</span>
+            <h2 class="title" data-anim style="animation-delay:60ms">질문 & <span class="accent">다음 단계</span></h2>
+          </div>
+          <div class="qa-layout">
+            <div class="qa-hero" data-anim style="animation-delay:120ms">
+              <div class="qa-hero-text">
+                오늘 내용 중 궁금한 점이 있으시면 편하게 질문해 주세요!
+                <span class="qa-small">어떤 질문이든 좋습니다 — AI 도구, 업무 적용, 실습 관련 무엇이든!</span>
+              </div>
+            </div>
+
+            <article class="card bg-amber" data-anim style="animation-delay:200ms">
+              <h3 style="display:flex; align-items:center; gap:8px;"><span class="icon-badge">✅</span> 오늘 배운 것</h3>
+              <ul class="recap-list" id="recapList">
+                <li class="recap-item" data-recap="0">
+                  <span class="recap-check"></span>
+                  고래.I 동아리의 목적과 방향
+                </li>
+                <li class="recap-item" data-recap="1">
+                  <span class="recap-check"></span>
+                  AI 3대장 — 각각의 강점과 선택 기준
+                </li>
+                <li class="recap-item" data-recap="2">
+                  <span class="recap-check"></span>
+                  GPT → Gemini → Claude 협업 워크플로우
+                </li>
+                <li class="recap-item" data-recap="3">
+                  <span class="recap-check"></span>
+                  Claude 스킬(use-hwpx)로 보고서 실습
+                </li>
+              </ul>
+            </article>
+
+            <article class="card bg-cyan next-preview" data-anim style="animation-delay:280ms">
+              <div class="next-header">
+                <span class="next-badge"><span class="arrow-icon">→</span> NEXT</span>
+                <h3 style="margin:0;">4월 수업 미리보기</h3>
+              </div>
+              <p style="font-weight:700; font-size:clamp(1.1rem, 1.4vw, 1.4rem); line-height:1.4;">
+                같은 AI라도 <span class="highlight-mark">"질문 구조 + 맥락 정보"</span>에 따라<br>결과가 얼마나 달라지는지 직접 체험합니다.
+              </p>
+              <div class="next-keywords">
+                <span class="next-keyword bg-amber">프롬프트 엔지니어링</span>
+                <span class="next-keyword bg-pink">컨텍스트 설계</span>
+                <span class="next-keyword bg-lime">질문 템플릿</span>
+                <span class="next-keyword bg-blue">실무 보고서 2배 생산성</span>
+              </div>
+              <div class="practice-tip" style="margin-top:auto;">
+                핵심: <strong>좋은 질문</strong>이 좋은 결과를 만듭니다.
+              </div>
+            </article>
+          </div>
+        `,
+        onMount: () => {
+          const items = document.querySelectorAll("[data-recap]");
+          items.forEach((item, i) => {
+            setTimeout(() => {
+              item.classList.add("checked");
+              item.querySelector(".recap-check").textContent = "✓";
+            }, 600 + i * 350);
+          });
+        }
+      }
+    ];
+
+    let current = 0;
+    let direction = 1;
+    let touchStartX = 0;
+
+    const slideEl = document.getElementById("slide");
+    const progressEl = document.getElementById("progress");
+    const progressWrapEl = document.getElementById("progressWrap");
+    const counterEl = document.getElementById("counter");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    const srEl = document.getElementById("sr");
+    const keyHint = document.getElementById("keyHint");
+
+    // Show keyboard hint briefly on load
+    setTimeout(() => keyHint.classList.add("show"), 800);
+    setTimeout(() => keyHint.classList.remove("show"), 4000);
+
+    function animateCounters() {
+      const counters = slideEl.querySelectorAll("[data-count]");
+      counters.forEach(el => {
+        const target = parseInt(el.dataset.count, 10);
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    function render() {
+      const s = slides[current];
+      slideEl.className = `slide ${direction > 0 ? "enter-right" : "enter-left"}`;
+      slideEl.innerHTML = s.render();
+
+      const ratio = (current / (slides.length - 1)) * 100;
+      progressEl.style.width = `${ratio}%`;
+      progressWrapEl.setAttribute("aria-valuemax", String(slides.length));
+      progressWrapEl.setAttribute("aria-valuenow", String(current + 1));
+      progressWrapEl.setAttribute("aria-valuetext", `${current + 1} / ${slides.length}`);
+      counterEl.textContent = `${current + 1} / ${slides.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+      srEl.textContent = `${current + 1}번 슬라이드`;
+      slideEl.focus({ preventScroll: true });
+
+      // Trigger counter animations
+      requestAnimationFrame(animateCounters);
+
+      // Trigger slide-specific onMount
+      if (slides[current].onMount) {
+        slides[current].onMount();
+      }
+    }
+
+    function next() {
+      if (current < slides.length - 1) {
+        direction = 1;
+        current += 1;
+        render();
+      }
+    }
+
+    function prev() {
+      if (current > 0) {
+        direction = -1;
+        current -= 1;
+        render();
+      }
+    }
+
+    prevBtn.addEventListener("click", prev);
+    nextBtn.addEventListener("click", next);
+
+    // Keyboard navigation
+    window.addEventListener("keydown", (e) => {
+      if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); next(); }
+      if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); prev(); }
+      if (e.key === "Home") { e.preventDefault(); direction = -1; current = 0; render(); }
+      if (e.key === "End") { e.preventDefault(); direction = 1; current = slides.length - 1; render(); }
+    });
+
+    // Touch / swipe support
+    slideEl.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slideEl.addEventListener("touchend", (e) => {
+      const diff = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(diff) > 50) {
+        if (diff < 0) next();
+        else prev();
+      }
+    }, { passive: true });
+
+    // Lightbox for cover logo
+    const lightbox = document.getElementById("lightbox");
+
+    document.addEventListener("click", (e) => {
+      if (e.target.closest(".cover-logo")) {
+        lightbox.classList.add("is-open");
+      }
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("is-open");
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+        lightbox.classList.remove("is-open");
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
