@@ -2,7 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#050510" />
   <title>고래.I | 울산광역시교육청 AI 연구학습동아리</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -600,12 +603,176 @@
 
     .terminal { position: relative; }
 
-    /* ═══ Responsive ═══ */
-    @media (max-width: 600px) {
-      .app { padding: 16px; }
-      .header { padding: 32px 0 20px; }
-      .grid { gap: 14px; grid-template-columns: 1fr; }
-      .term-body { padding: 16px; }
+    /* ═══ Responsive — Tablet ═══ */
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    /* ═══ Responsive — Mobile ═══ */
+    @media (max-width: 480px) {
+      .app {
+        padding: 12px;
+      }
+
+      .header {
+        padding: 24px 0 16px;
+      }
+
+      .logo-text {
+        font-size: 24px;
+        letter-spacing: 2px;
+      }
+
+      .tagline {
+        font-size: 7px;
+        letter-spacing: 1px;
+        line-height: 2;
+      }
+
+      .header-year {
+        font-size: 7px;
+        padding: 5px 10px;
+        margin-top: 10px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 12px 0 24px;
+      }
+
+      /* Card */
+      .card-dots {
+        padding: 10px 14px 6px;
+        gap: 5px;
+      }
+
+      .card-dot {
+        width: 5px;
+        height: 5px;
+      }
+
+      .card-body {
+        padding: 4px 14px 16px;
+      }
+
+      .card-badges {
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+
+      .badge {
+        font-size: 7px;
+        padding: 3px 8px;
+      }
+
+      .card-title {
+        font-size: 17px;
+        margin-bottom: 4px;
+      }
+
+      .card-desc {
+        font-size: 12px;
+        margin-bottom: 12px;
+      }
+
+      /* Receipt */
+      .receipt-name {
+        font-size: 15px;
+      }
+
+      .receipt-dept {
+        font-size: 12px;
+      }
+
+      .receipt-info {
+        padding: 10px 12px;
+      }
+
+      .card-actions {
+        gap: 6px;
+      }
+
+      .card-btn {
+        padding: 10px 0;
+        font-size: 7px;
+      }
+
+      /* Terminal Modal */
+      .modal-overlay {
+        padding: 12px;
+        align-items: flex-end;
+      }
+
+      .terminal {
+        max-width: 100%;
+      }
+
+      .term-bar {
+        padding: 8px 12px;
+      }
+
+      .term-bar-title {
+        font-size: 6px;
+      }
+
+      .term-body {
+        padding: 14px;
+      }
+
+      .term-line {
+        font-size: 8px;
+        margin-bottom: 16px;
+      }
+
+      .term-label {
+        font-size: 7px;
+        margin-bottom: 5px;
+      }
+
+      .term-input {
+        font-size: 14px;
+        padding: 12px 10px;
+        /* iOS zoom 방지 */
+      }
+
+      .term-btn {
+        padding: 14px;
+        font-size: 9px;
+      }
+
+      .term-msg {
+        font-size: 7px;
+      }
+
+      /* Footer */
+      .footer {
+        font-size: 6px;
+        padding: 16px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .admin-link {
+        margin-left: 0;
+        font-size: 6px;
+        padding: 3px 8px;
+      }
+    }
+
+    /* ═══ Safe area (노치/홈바 대응) ═══ */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .app {
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      }
+      .modal-overlay {
+        padding-bottom: env(safe-area-inset-bottom);
+      }
     }
 
     /* ═══ Page load animation ═══ */
@@ -737,9 +904,10 @@
     const ctx = canvas.getContext('2d');
     let dots = [];
     let mouseX = -9999, mouseY = -9999;
-    const SPACING = 32;
-    const BASE_R = 1.5;
-    const INTERACT_R = 140;
+    const isMobile = window.innerWidth <= 600;
+    const SPACING = isMobile ? 44 : 32;
+    const BASE_R = isMobile ? 1 : 1.5;
+    const INTERACT_R = isMobile ? 80 : 140;
 
     // Whale sprite (pixel art, 18x10)
     const WHALE = [
@@ -805,7 +973,7 @@
 
       // Whale timer
       whaleTimer += 0.016;
-      if (!whaleActive && whaleTimer > 25 + Math.random() * 15) {
+      if (!isMobile && !whaleActive && whaleTimer > 25 + Math.random() * 15) {
         whaleTimer = 0;
         spawnWhale();
       }

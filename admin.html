@@ -2,7 +2,8 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#050510" />
   <title>고래.I | 출석부 관리</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -392,9 +393,68 @@
     }
 
     @media (max-width: 600px) {
-      .app { padding: 14px; }
-      .header { flex-direction: column; align-items: flex-start; }
-      th, td { padding: 8px 12px; font-size: 12px; }
+      .app { padding: 12px; }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 14px 0;
+        margin-bottom: 16px;
+      }
+
+      .header h1 { font-size: 12px; }
+
+      .back-btn { font-size: 7px; padding: 5px 10px; }
+
+      /* Stats */
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .stat { padding: 12px 10px; }
+      .stat-num { font-size: 20px; }
+      .stat-label { font-size: 11px; }
+
+      /* Tabs */
+      .tabs { gap: 4px; margin-bottom: 14px; }
+      .tab { font-size: 7px; padding: 7px 10px; }
+
+      /* Actions */
+      .actions { gap: 6px; margin-bottom: 16px; }
+      .dl-btn { font-size: 6px; padding: 7px 10px; }
+
+      /* Table */
+      .section { margin-bottom: 16px; }
+      .section-head { padding: 10px 12px; }
+      .section-title { font-size: 13px; }
+      .section-count { font-size: 8px; }
+
+      table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      thead { display: table; width: 100%; table-layout: fixed; }
+      tbody { display: table; width: 100%; table-layout: fixed; }
+      th { font-size: 6px; padding: 8px 10px; letter-spacing: 1px; }
+      td { font-size: 12px; padding: 8px 10px; }
+      td.num { font-size: 8px; width: 32px; }
+      td.time-cell { font-size: 7px; }
+
+      .empty-row { padding: 20px; font-size: 12px; }
+
+      /* Auth */
+      .auth { margin: 40px auto; }
+      .auth-icon { font-size: 24px; }
+      .auth input { font-size: 14px; padding: 12px; }
+      .auth button { font-size: 8px; padding: 12px; }
+
+      /* Footer */
+      .footer { padding: 16px 0; margin-top: 12px; }
+      .refresh-btn { font-size: 7px; padding: 6px 12px; }
+    }
+
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .app { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
     }
 
     /* Animation */
