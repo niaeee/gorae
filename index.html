@@ -855,6 +855,31 @@
     </div>
   </div>
 
+  <!-- Admin Modal -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="term-circle r"></span>
+        <span class="term-circle y"></span>
+        <span class="term-circle g"></span>
+        <span class="term-bar-title">ADMIN ACCESS</span>
+        <button class="term-close" id="adminModalClose">ESC</button>
+      </div>
+      <div class="term-body">
+        <div class="term-line">
+          <span class="term-prompt">$</span>관리자만 접속 가능합니다.
+          <span class="term-lecture-name" id="adminLecName"></span>
+        </div>
+        <div class="term-field">
+          <label class="term-label">ADMIN KEY *</label>
+          <input type="password" id="adminKeyInput" class="term-input" placeholder="관리자 키" autocomplete="off" />
+        </div>
+        <button class="term-btn" id="adminVerifyBtn">ENTER</button>
+        <div class="term-msg" id="adminMsg"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ═══════════════════════════════════════════════
     // 강의 데이터
@@ -902,7 +927,19 @@
         color: '--pink',
         group: '교육청',
       },
-      // 지자체는 메인에 표시하지 않음 (관리자 전용)
+      // ── 지자체 (관리자 전용) ──
+      {
+        id: 'gov03',
+        month: '3월',
+        cls: '북구청',
+        badge: 'gov',
+        title: 'AI 직무역량 강화 교육',
+        desc: '3.19 북구청 · AI챔피언 도전하기',
+        status: 'active',
+        color: '--yellow',
+        group: '지자체',
+        adminOnly: true,
+      },
     ];
 
     // ═══════════════════════════════════════════════
@@ -1133,6 +1170,12 @@
                 <button class="card-btn btn-logout" data-logout="${lec.id}">LOGOUT</button>
               </div>
             </div>`;
+        } else if (lec.adminOnly) {
+          statusHTML = `
+            <div class="card-status status-locked" style="color:var(--yellow)">
+              <span class="status-icon" style="border-color:rgba(254,228,64,0.3)">&#9679;</span>
+              <span>ADMIN ONLY</span>
+            </div>`;
         } else {
           statusHTML = `
             <div class="card-status status-locked">
@@ -1156,7 +1199,13 @@
 
         // 잠금 상태: 클릭 → 모달
         if (!isUpcoming && !isUnlocked) {
-          card.addEventListener('click', () => openModal(lec));
+          card.addEventListener('click', () => {
+            if (lec.adminOnly) {
+              openAdminModal(lec);
+            } else {
+              openModal(lec);
+            }
+          });
         }
 
         gridEl.appendChild(card);
@@ -1263,6 +1312,55 @@
         termMsg.className = 'term-msg error';
         verifyBtn.disabled = false;
       }
+    }
+
+    // ═══════════════════════════════════════════════
+    // Admin Modal (관리자 전용 강의)
+    // ═══════════════════════════════════════════════
+    const adminModal = document.getElementById('adminModal');
+    const adminLecName = document.getElementById('adminLecName');
+    const adminKeyInput = document.getElementById('adminKeyInput');
+    const adminVerifyBtn = document.getElementById('adminVerifyBtn');
+    const adminMsg = document.getElementById('adminMsg');
+    const adminModalClose = document.getElementById('adminModalClose');
+    let adminLecture = null;
+
+    function openAdminModal(lec) {
+      adminLecture = lec;
+      adminLecName.textContent = `${lec.month} ${lec.cls} — ${lec.title}`;
+      adminMsg.textContent = '';
+      adminMsg.className = 'term-msg';
+      adminKeyInput.value = '';
+      adminModal.classList.add('open');
+      setTimeout(() => adminKeyInput.focus(), 100);
+    }
+
+    function closeAdminModal() {
+      adminModal.classList.remove('open');
+      adminLecture = null;
+    }
+
+    adminModalClose.addEventListener('click', closeAdminModal);
+    adminModal.addEventListener('click', e => {
+      if (e.target === adminModal) closeAdminModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && adminModal.classList.contains('open')) closeAdminModal();
+    });
+
+    adminVerifyBtn.addEventListener('click', verifyAdmin);
+    adminKeyInput.addEventListener('keydown', e => { if (e.key === 'Enter') verifyAdmin(); });
+
+    function verifyAdmin() {
+      if (!adminLecture) return;
+      const key = adminKeyInput.value.trim();
+      if (!key) {
+        adminMsg.textContent = '> ERROR: 관리자 키를 입력하세요';
+        adminMsg.className = 'term-msg error';
+        return;
+      }
+      // 관리자 키로 직접 이동
+      window.location.href = `/${adminLecture.id}/?key=${encodeURIComponent(key)}`;
     }
 
     // Check URL params for auto-open modal
