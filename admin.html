@@ -633,6 +633,17 @@
           `;
         }
       });
+      // 관리자 전용 강의 바로가기
+      lectureIds.forEach(id => {
+        const lec = lectures[id];
+        if (lec.adminOnly) {
+          actionsHTML += `
+            <a class="dl-btn" href="/${id}/?key=${encodeURIComponent(adminKey)}" target="_blank" style="border-color:rgba(254,228,64,0.3);color:var(--yellow);">
+              <span class="arrow">&#8594;</span> ${lec.name}
+            </a>
+          `;
+        }
+      });
       $('actions').innerHTML = actionsHTML;
 
       // ── Sections ──

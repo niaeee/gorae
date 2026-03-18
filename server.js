@@ -18,8 +18,8 @@ const LECTURES = {
   '03C':   { name: '3월 심화반 C',   month: '3월', group: '교육청', active: false },
   '04AB':  { name: '4월 기초반 A/B', month: '4월', group: '교육청', active: false },
   '04C':   { name: '4월 심화반 C',   month: '4월', group: '교육청', active: false },
-  // 지자체
-  'gov03': { name: '3월 북구청 AI직무역량강화', month: '3월', group: '지자체', active: false },
+  // 지자체 (관리자 전용)
+  'gov03': { name: '3월 북구청 AI직무역량강화', month: '3월', group: '지자체', active: false, adminOnly: true },
 };
 
 // ═══════════════════════════════════════════════════════════
@@ -177,6 +177,7 @@ app.get('/api/admin/attendance', adminAuth, (req, res) => {
       name: lec.name,
       month: lec.month,
       active: lec.active,
+      adminOnly: lec.adminOnly || false,
       total: 0,
       attendees: [],
     };
@@ -244,17 +245,29 @@ app.get('/admin', (req, res) => {
 
 // ── 강의 페이지 접근 보호 ──
 Object.keys(LECTURES).forEach(id => {
-  app.use(`/${id}`, (req, res, next) => {
-    let access = {};
-    try {
-      access = req.signedCookies.gorae_access
-        ? JSON.parse(req.signedCookies.gorae_access)
-        : {};
-    } catch { access = {}; }
+  const lec = LECTURES[id];
 
-    if (access[id]) return next();
-    res.redirect(`/?need=${id}`);
-  });
+  if (lec.adminOnly) {
+    // 지자체 등 관리자 전용: 관리자 키 쿼리로만 접근
+    app.use(`/${id}`, (req, res, next) => {
+      const key = req.query.key;
+      if (key === (process.env.ADMIN_KEY || 'gorae-admin-2026')) return next();
+      res.status(403).send('관리자 전용 강의입니다.');
+    });
+  } else {
+    // 일반 강의: 출석 쿠키로 접근
+    app.use(`/${id}`, (req, res, next) => {
+      let access = {};
+      try {
+        access = req.signedCookies.gorae_access
+          ? JSON.parse(req.signedCookies.gorae_access)
+          : {};
+      } catch { access = {}; }
+
+      if (access[id]) return next();
+      res.redirect(`/?need=${id}`);
+    });
+  }
 });
 
 // ── 정적 파일 서빙 ──
