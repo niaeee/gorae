@@ -1167,6 +1167,14 @@
       line-height: 1.4;
     }
 
+    /* ── Prompt 3col grid ── */
+    .prompt-3col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: auto auto;
+      gap: 10px;
+    }
+
     /* ── Prompt formula slide ── */
     .prompt-layout {
       display: grid;
@@ -1577,9 +1585,11 @@
 
     @media (max-width: 700px) {
       .app { padding: 10px; gap: 10px; }
-      .grid-4, .grid-3, .grid-2, .timeline, .about-grid, .roadmap-grid, .practice-grid, .qa-layout, .security-grid, .prompt-layout { grid-template-columns: 1fr; }
+      .grid-4, .grid-3, .grid-2, .timeline, .about-grid, .roadmap-grid, .practice-grid, .qa-layout, .security-grid, .prompt-layout, .prompt-3col { grid-template-columns: 1fr; }
       .prompt-formula { flex-direction: column; }
       .prompt-full, .prompt-full { grid-column: 1; }
+      .prompt-3col .prompt-formula,
+      .prompt-3col [style*="grid-column"] { grid-column: 1 !important; }
       .qa-layout { grid-template-rows: auto auto auto; }
       .qa-hero { grid-column: 1; flex-direction: column; text-align: center; }
       .instructor-wrap, .instructor-meta { grid-template-columns: 1fr; }
@@ -2086,7 +2096,7 @@
             <span class="kicker bg-amber" data-anim style="animation-delay:0ms">실습 전 핵심</span>
             <h2 class="title" data-anim style="animation-delay:60ms"><span class="accent">만능 프롬프트</span> 3요소</h2>
           </div>
-          <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:auto auto; gap:10px;">
+          <div class="prompt-3col">
             <div class="prompt-formula" data-anim style="animation-delay:100ms; grid-column:1/-1;">
               <span class="prompt-block bg-amber">역할 부여</span>
               <span class="prompt-plus">+</span>
