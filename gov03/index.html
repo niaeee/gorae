@@ -236,10 +236,10 @@
 <body>
   <div class="ambient"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
   <div class="app">
-    <div class="pbar" role="progressbar" aria-valuemax="21"><div id="pf" class="pfill"></div></div>
+    <div class="pbar" role="progressbar" aria-valuemax="24"><div id="pf" class="pfill"></div></div>
     <main class="stage" aria-live="polite"><section id="sl" class="slide" tabindex="0"></section></main>
     <footer class="footer">
-      <div class="brand"><img src="img/grae-i_logo.png" alt="고래.I" style="width:24px;height:24px;border-radius:6px;object-fit:contain;background:rgba(255,255,255,.85);padding:2px"><span>AI 직무역량 강화 교육</span><span id="cnt" class="cnt">1 / 21</span></div>
+      <div class="brand"><img src="img/grae-i_logo.png" alt="고래.I" style="width:24px;height:24px;border-radius:6px;object-fit:contain;background:rgba(255,255,255,.85);padding:2px"><span>AI 직무역량 강화 교육</span><span id="cnt" class="cnt">1 / 24</span></div>
       <div class="btns"><button id="bp" aria-label="이전">← 이전</button><button id="bn" aria-label="다음">다음 →</button></div>
     </footer>
   </div>
@@ -662,7 +662,102 @@ const S = [
   </table>
 </div>`},
 
-/* ── 16. AI 릴레이 워크플로우 ── */
+/* ── 16. AI 3대장 상세 소개 ── */
+{id:"ai-detail",r:()=>`
+<div>
+  <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>AI 3대장</span>
+  <h2 class="t" data-a style="animation-delay:60ms">하나만 쓰면 비효율, <span class="gt">같이 쓰면</span> 생산성</h2>
+  <p class="sub" data-a style="animation-delay:120ms">각 AI는 경쟁 관계이면서 동시에 역할이 다른 도구입니다.</p>
+</div>
+<div class="g3" data-a style="animation-delay:180ms">
+  <div class="g">
+    <div class="model-head">
+      <img class="logo-img" src="img/chatgpt_logo.png" alt="ChatGPT">
+      <div><h3 style="margin:0">ChatGPT</h3><p style="margin:0;font-size:.9rem">범용 시작점 · 확장 생태계</p></div>
+    </div>
+    <ul>
+      <li>아이디어 정리와 초안 생성이 빠름</li>
+      <li>다양한 서비스 연동 및 확장 옵션</li>
+      <li>어떤 작업이든 무난한 첫 시도로 적합</li>
+    </ul>
+  </div>
+  <div class="g">
+    <div class="model-head">
+      <img class="logo-img" src="img/gemini_logo.png" alt="Gemini">
+      <div><h3 style="margin:0">Gemini</h3><p style="margin:0;font-size:.9rem">멀티모달 분석 특화</p></div>
+    </div>
+    <ul>
+      <li>이미지·차트·영상 맥락 파악이 빠름</li>
+      <li>구글 연동으로 최신 정보 접근 강점</li>
+      <li>대용량 자료 읽고 구조화하기 유리</li>
+    </ul>
+  </div>
+  <div class="g">
+    <div class="model-head">
+      <img class="logo-img" src="img/claude_logo.png" alt="Claude">
+      <div><h3 style="margin:0">Claude</h3><p style="margin:0;font-size:.9rem">지시 이행 · 문서 완성도 특화</p></div>
+    </div>
+    <ul>
+      <li>업무 톤에 맞는 자연스러운 보고서 작성</li>
+      <li>복잡한 단계 지시를 누락 없이 수행</li>
+      <li>긴 문서 처리 및 구조화 능력 우수</li>
+    </ul>
+  </div>
+</div>`},
+
+/* ── 17. 상황별 실전 가이드 ── */
+{id:"guide",r:()=>`
+<div>
+  <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>실전 가이드</span>
+  <h2 class="t" data-a style="animation-delay:60ms">업무 상황에 맞는 <span class="gt">최적 모델</span></h2>
+</div>
+<div class="g2" data-a style="animation-delay:150ms">
+  <div class="g"><h3>이미지·영상 해석 → <span class="hb2">Gemini</span></h3><p>사진 속 텍스트, 차트 의미, 영상 핵심 장면을 빠르게 추출</p></div>
+  <div class="g"><h3>보고서/기획서 작성 → <span class="hv">Claude</span></h3><p>문체와 형식을 지켜 자연스럽고 설득력 있는 문서 생성</p></div>
+  <div class="g"><h3>초기 방향 탐색 → <span class="htl">ChatGPT</span></h3><p>아이디어 정리, 질문 프레임 구성, 작업 초안 도출</p></div>
+  <div class="g"><h3>단계형 업무 자동화 → <span class="hv">Claude</span></h3><p>자료 읽기 → 정리 → 초안 작성까지 순차 처리</p></div>
+  <div class="g"><h3>장문 문서 리뷰 → <span class="hb2">Gemini</span></h3><p>긴 보고서·자료집에서 핵심 논점과 근거를 구조화</p></div>
+  <div class="g"><h3>연동·확장 활용 → <span class="htl">ChatGPT</span></h3><p>외부 서비스 연결과 확장형 워크플로우 설계</p></div>
+</div>`},
+
+/* ── 18. 만능 프롬프트 3요소 ── */
+{id:"prompt",r:()=>`
+<div>
+  <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>프롬프트 핵심</span>
+  <h2 class="t" data-a style="animation-delay:60ms"><span class="gt">만능 프롬프트</span> 3요소</h2>
+</div>
+<div data-a style="animation-delay:150ms">
+  <div class="hb" style="text-align:center;margin-bottom:12px;padding:16px 20px">
+    <div class="ht" style="font-size:clamp(1.1rem,1.6vw,1.5rem)">
+      <span style="color:var(--amber)">역할 부여</span> + <span style="color:var(--teal)">인사이트 → 최적안</span> + <span style="color:var(--rose)">반말 톤</span> = <strong>만능 프롬프트</strong>
+    </div>
+  </div>
+  <div class="g3">
+    <div class="g">
+      <h3><span style="color:var(--amber)">1</span> 역할 부여</h3>
+      <p>AI에게 <strong>전문가 역할</strong>을 먼저 부여하면 답변의 깊이가 올라갑니다.</p>
+      <div class="kp" style="margin-top:8px;font-size:.95rem">
+        "너는 <strong class="ha">20년차 행정 전문가</strong>야. 정책 보고서를 검토하고 개선안을 제시해."
+      </div>
+    </div>
+    <div class="g">
+      <h3><span style="color:var(--teal)">2</span> 인사이트 → 최적안</h3>
+      <p><strong>여러 관점</strong>에서 아이디어를 뽑은 뒤 <strong>최적안</strong>을 골라달라고 요청합니다.</p>
+      <div class="kp" style="margin-top:8px;font-size:.95rem;border-left-color:var(--teal)">
+        "<strong class="htl">5가지 이상 개선 방향</strong>을 도출하고, 실현 가능성 기준으로 <strong class="htl">최적안 1개</strong>를 추천해."
+      </div>
+    </div>
+    <div class="g">
+      <h3><span style="color:var(--rose)">3</span> 반말 톤 지정</h3>
+      <p>연구에 따르면 <strong>직접적이고 간결한 톤</strong>이 과도한 존댓말보다 AI 성능이 높습니다.</p>
+      <div class="kp" style="margin-top:8px;font-size:.95rem;border-left-color:var(--rose)">
+        <strong class="hr">핵심만 짧게</strong> 지시 → 수식어·인사 제거 → 정확한 답변
+      </div>
+    </div>
+  </div>
+</div>`},
+
+/* ── 19. AI 릴레이 워크플로우 ── */
 {id:"relay",r:()=>`
 <div>
   <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>실전 워크플로우</span>

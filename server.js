@@ -248,8 +248,10 @@ Object.keys(LECTURES).forEach(id => {
   const lec = LECTURES[id];
 
   if (lec.adminOnly) {
-    // 지자체 등 관리자 전용: 관리자 키 쿼리로만 접근
+    // 지자체 등 관리자 전용: 관리자 키 쿼리로만 접근 (정적 파일은 허용)
     app.use(`/${id}`, (req, res, next) => {
+      // 이미지, CSS, JS 등 정적 파일은 통과
+      if (/\.(png|jpe?g|gif|svg|webp|ico|css|js|woff2?|ttf|eot)$/i.test(req.path)) return next();
       const key = req.query.key;
       if (key === (process.env.ADMIN_KEY || 'gorae-admin-2026')) return next();
       res.status(403).send('관리자 전용 강의입니다.');
