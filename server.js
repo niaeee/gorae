@@ -19,7 +19,7 @@ const LECTURES = {
   '04AB':  { name: '4월 기초반 A/B', month: '4월', group: '교육청', active: false },
   '04C':   { name: '4월 심화반 C',   month: '4월', group: '교육청', active: false },
   // 지자체 (관리자 전용)
-  'gov03': { name: '3월 북구청 AI직무역량강화', month: '3월', group: '지자체', active: false, adminOnly: true },
+  'gov03': { name: '3월 북구청 AI직무역량강화', month: '3월', group: '지자체', active: true, adminOnly: true },
 };
 
 // ═══════════════════════════════════════════════════════════
