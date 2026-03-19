@@ -13,8 +13,8 @@
       --bg-glass: rgba(255,255,255,0.055);
       --bg-glass-hover: rgba(255,255,255,0.09);
       --text: #eef0f6;
-      --text-2: rgba(238,240,246,0.55);
-      --text-3: rgba(238,240,246,0.3);
+      --text-2: rgba(238,240,246,0.72);
+      --text-3: rgba(238,240,246,0.45);
       --blue: #5b9aff;
       --violet: #a78bfa;
       --teal: #34d399;
@@ -61,7 +61,7 @@
     /* ── Stage ── */
     .stage{position:relative;z-index:2;border-radius:var(--r-lg);overflow:hidden;background:rgba(255,255,255,.015);border:var(--border);backdrop-filter:blur(2px)}
 
-    .slide{position:absolute;inset:0;z-index:2;padding:clamp(18px,3vw,44px);display:grid;grid-template-rows:auto 1fr;gap:18px;will-change:transform,opacity;outline:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
+    .slide{position:absolute;inset:0;z-index:2;padding:clamp(14px,2vw,28px);display:grid;grid-template-rows:auto 1fr;gap:12px;will-change:transform,opacity;outline:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
     .slide.aR{animation:sR .55s var(--ease) both}
     .slide.aL{animation:sL .55s var(--ease) both}
     @keyframes sR{from{transform:translateX(50px);opacity:0}to{transform:none;opacity:1}}
@@ -71,7 +71,7 @@
     @keyframes rev{to{opacity:1;transform:none}}
 
     /* ── Components ── */
-    .kicker{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;font-weight:600;font-size:clamp(.78rem,.95vw,.9rem);letter-spacing:.04em;text-transform:uppercase;background:var(--bg-glass-hover);border:var(--border-g);color:var(--text-2)}
+    .kicker{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;font-weight:600;font-size:clamp(.85rem,1vw,1rem);letter-spacing:.04em;text-transform:uppercase;background:var(--bg-glass-hover);border:var(--border-g);color:var(--text-2)}
     .kdot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:pulse 2s ease-in-out infinite}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
 
@@ -79,19 +79,19 @@
     .gt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .gw{background:var(--grad-warm);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .gc{background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .sub{margin:6px 0 0;font-size:clamp(.95rem,1.6vw,1.35rem);font-weight:500;color:var(--text-2);line-height:1.5}
+    .sub{margin:6px 0 0;font-size:clamp(1.1rem,1.8vw,1.55rem);font-weight:500;color:var(--text-2);line-height:1.5}
 
-    .g{background:var(--bg-glass);border:var(--border-g);border-radius:var(--r-md);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:18px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s ease}
+    .g{background:var(--bg-glass);border:var(--border-g);border-radius:var(--r-md);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:16px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s ease}
     .g:hover{background:var(--bg-glass-hover);transform:translateY(-2px);box-shadow:var(--glow-b)}
-    .g h3{font-size:clamp(1.05rem,1.4vw,1.4rem);font-weight:700;margin:0 0 8px;line-height:1.3}
-    .g p,.g li{font-size:clamp(.88rem,1.05vw,1.1rem);line-height:1.6;color:var(--text-2);font-weight:450}
-    .g ul{margin:0;padding-left:1.15rem;display:grid;gap:5px}
+    .g h3{font-size:clamp(1.2rem,1.6vw,1.6rem);font-weight:700;margin:0 0 6px;line-height:1.3}
+    .g p,.g li{font-size:clamp(1rem,1.2vw,1.25rem);line-height:1.55;color:var(--text-2);font-weight:450}
+    .g ul{margin:0;padding-left:1.15rem;display:grid;gap:4px}
 
-    .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 
-    .chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:clamp(.78rem,.9vw,.88rem);font-weight:600;background:var(--bg-glass-hover);border:var(--border-g);color:var(--text);transition:transform .2s var(--spring)}
+    .chip{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:999px;font-size:clamp(.9rem,1vw,1rem);font-weight:600;background:var(--bg-glass-hover);border:var(--border-g);color:var(--text);transition:transform .2s var(--spring)}
     .chip:hover{transform:scale(1.03)}
     .cb{background:rgba(91,154,255,.13);color:var(--blue)}
     .cv{background:rgba(167,139,250,.13);color:var(--violet)}
@@ -99,24 +99,24 @@
     .cr{background:rgba(251,113,133,.13);color:var(--rose)}
     .ca{background:rgba(251,191,36,.13);color:var(--amber)}
 
-    .kp{padding:14px 18px;border-radius:var(--r-md);background:rgba(91,154,255,.07);border-left:3px solid var(--blue);font-size:clamp(.92rem,1.15vw,1.15rem);font-weight:600;line-height:1.5;color:var(--text)}
+    .kp{padding:14px 18px;border-radius:var(--r-md);background:rgba(91,154,255,.07);border-left:3px solid var(--blue);font-size:clamp(1.05rem,1.3vw,1.3rem);font-weight:600;line-height:1.5;color:var(--text)}
     .kp-w{background:rgba(251,113,133,.07);border-left-color:var(--rose)}
 
     .hb{padding:20px 28px;border-radius:var(--r-lg);background:var(--grad-hero);position:relative;overflow:hidden}
     .hb::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(255,255,255,.03) 10px,rgba(255,255,255,.03) 20px);pointer-events:none}
-    .ht{font-size:clamp(1.15rem,1.8vw,1.7rem);font-weight:800;line-height:1.35;position:relative;z-index:1}
+    .ht{font-size:clamp(1.3rem,2vw,1.9rem);font-weight:800;line-height:1.35;position:relative;z-index:1}
     .hs{font-size:clamp(.85rem,1vw,1rem);font-weight:500;color:rgba(255,255,255,.65);margin-top:6px;position:relative;z-index:1}
 
     .qb{position:relative;padding:18px 22px;border-radius:var(--r-md);background:var(--bg-glass);border:var(--border-g)}
     .qb::before{content:"\201C";position:absolute;top:-10px;left:10px;font-size:3.5rem;font-weight:900;color:rgba(91,154,255,.18);font-family:Georgia,serif;line-height:1}
-    .qt{font-size:clamp(1rem,1.4vw,1.35rem);font-weight:700;line-height:1.5}
+    .qt{font-size:clamp(1.15rem,1.6vw,1.5rem);font-weight:700;line-height:1.5}
 
     .hb2{color:var(--blue)}.hv{color:var(--violet)}.htl{color:var(--teal)}.hr{color:var(--rose)}.ha{color:var(--amber)}
 
     .dv{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:6px 0}
 
     /* ── Meta items ── */
-    .mi{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);font-weight:600;font-size:clamp(.83rem,.95vw,.95rem);transition:background .2s ease}
+    .mi{display:flex;align-items:center;gap:9px;padding:10px 14px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);font-weight:600;font-size:clamp(.95rem,1.1vw,1.1rem);transition:background .2s ease}
     .mi:hover{background:var(--bg-glass-hover)}
     .micon{width:30px;height:30px;display:inline-grid;place-items:center;border-radius:8px;background:var(--bg-glass-hover);font-size:.85rem;flex-shrink:0}
 
@@ -125,8 +125,8 @@
     .ti{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;padding:9px 12px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);transition:background .2s ease,transform .2s var(--ease)}
     .ti:hover{background:var(--bg-glass-hover);transform:translateX(3px)}
     .td{width:8px;height:8px;border-radius:50%;background:var(--grad);box-shadow:0 0 8px rgba(91,154,255,.35)}
-    .tt strong{font-size:clamp(.9rem,1.1vw,1.1rem);display:block;margin-bottom:1px}
-    .tt span{font-size:clamp(.78rem,.9vw,.9rem);color:var(--text-3);font-weight:500}
+    .tt strong{font-size:clamp(1rem,1.2vw,1.2rem);display:block;margin-bottom:1px}
+    .tt span{font-size:clamp(.9rem,1vw,1rem);color:var(--text-3);font-weight:500}
 
     /* ── Stat ── */
     .sb{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;letter-spacing:-.03em;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -135,7 +135,7 @@
     /* ── Table ── */
     .ctbl{width:100%;border-collapse:separate;border-spacing:0 5px}
     .ctbl th{padding:8px 12px;font-size:clamp(.73rem,.82vw,.82rem);font-weight:700;color:var(--text-3);text-align:left;text-transform:uppercase;letter-spacing:.04em}
-    .ctbl td{padding:9px 12px;font-size:clamp(.85rem,.98vw,.98rem);font-weight:500;color:var(--text-2);background:var(--bg-glass);line-height:1.4}
+    .ctbl td{padding:10px 14px;font-size:clamp(1rem,1.1vw,1.15rem);font-weight:500;color:var(--text-2);background:var(--bg-glass);line-height:1.4}
     .ctbl tr td:first-child{border-radius:10px 0 0 10px;font-weight:700;color:var(--text)}
     .ctbl tr td:last-child{border-radius:0 10px 10px 0}
 
@@ -167,8 +167,8 @@
     .wc::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad-warm)}
 
     /* ── Impact ── */
-    .impact{font-size:clamp(3.5rem,9vw,9rem);font-weight:900;letter-spacing:-.04em;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center}
-    .impact-s{text-align:center;font-size:clamp(1rem,1.6vw,1.45rem);font-weight:600;color:var(--text-2);margin-top:10px}
+    .impact{font-size:clamp(4rem,10vw,10rem);font-weight:900;letter-spacing:-.04em;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center}
+    .impact-s{text-align:center;font-size:clamp(1.2rem,1.8vw,1.6rem);font-weight:600;color:var(--text-2);margin-top:10px}
 
     /* ── Center layout ── */
     .cl{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:100%}
@@ -179,7 +179,7 @@
 
     /* ── Recap ── */
     .rl{display:grid;gap:7px;width:100%;max-width:520px}
-    .ri{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);font-weight:600;font-size:clamp(.88rem,1.05vw,1.05rem);transition:background .2s ease,transform .2s var(--ease)}
+    .ri{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);font-weight:600;font-size:clamp(1rem,1.2vw,1.2rem);transition:background .2s ease,transform .2s var(--ease)}
     .ri:hover{background:var(--bg-glass-hover);transform:translateX(3px)}
     .rc{width:22px;height:22px;display:inline-grid;place-items:center;border-radius:6px;background:rgba(91,154,255,.13);color:var(--blue);font-size:.65rem;font-weight:900;flex-shrink:0}
 
@@ -210,6 +210,14 @@
     /* ── Path num ── */
     .pn{font-size:clamp(2.5rem,3.5vw,3.5rem);font-weight:900;color:rgba(255,255,255,.05);line-height:1;position:absolute;top:10px;right:14px}
 
+    /* ── Images ── */
+    .logo-img{width:56px;height:56px;border-radius:14px;object-fit:contain;background:rgba(255,255,255,.9);padding:5px;flex-shrink:0}
+    .logo-img-lg{width:72px;height:72px;border-radius:16px;padding:6px}
+    .logo-img-sm{width:40px;height:40px;border-radius:10px;padding:4px}
+    .photo{width:100%;max-height:280px;object-fit:cover;border-radius:var(--r-md);border:var(--border-g)}
+    .photo-sm{max-height:180px}
+    .model-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+
     /* ── Responsive ── */
     @media(max-width:980px){
       .g3,.g4,.eg{grid-template-columns:repeat(2,1fr)}
@@ -228,10 +236,10 @@
 <body>
   <div class="ambient"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
   <div class="app">
-    <div class="pbar" role="progressbar"><div id="pf" class="pfill"></div></div>
+    <div class="pbar" role="progressbar" aria-valuemax="21"><div id="pf" class="pfill"></div></div>
     <main class="stage" aria-live="polite"><section id="sl" class="slide" tabindex="0"></section></main>
     <footer class="footer">
-      <div class="brand"><div class="bdot"></div><span>AI 직무역량 강화 교육</span><span id="cnt" class="cnt">1 / 20</span></div>
+      <div class="brand"><img src="img/grae-i_logo.png" alt="고래.I" style="width:24px;height:24px;border-radius:6px;object-fit:contain;background:rgba(255,255,255,.85);padding:2px"><span>AI 직무역량 강화 교육</span><span id="cnt" class="cnt">1 / 21</span></div>
       <div class="btns"><button id="bp" aria-label="이전">← 이전</button><button id="bn" aria-label="다음">다음 →</button></div>
     </footer>
   </div>
@@ -252,8 +260,13 @@ const S = [
 <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:14px" data-a style="animation-delay:240ms">
   <div class="g2">
     <div class="g" style="display:flex;flex-direction:column;gap:10px;">
-      <h3>강사 이홍우 주무관</h3>
-      <p>울산광역시교육청 정책관실 정책기획팀</p>
+      <div style="display:flex;align-items:center;gap:12px">
+        <img class="logo-img" src="img/grae-i_logo.png" alt="고래.I">
+        <div>
+          <h3 style="margin:0">강사 이홍우 주무관</h3>
+          <p style="margin:0">울산광역시교육청 정책관실 정책기획팀</p>
+        </div>
+      </div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:auto">
         <span class="chip cb">AI 챔피언 블루 인증</span>
         <span class="chip cv">고래.I 강사</span>
@@ -286,12 +299,13 @@ const S = [
       <div class="mi"><span class="micon">📊</span><span>교육부 주관 데이터리더 활동</span></div>
     </div>
   </div>
-  <div class="g" style="display:flex;flex-direction:column;justify-content:space-between;gap:16px">
+  <div class="g" style="display:flex;flex-direction:column;justify-content:space-between;gap:12px">
+    <img class="photo photo-sm" src="img/leehongwoo.jpeg" alt="이홍우 강사">
     <div class="qb">
       <p class="qt">경험에서 나온 이야기 — <span class="hb2">이론이 아닌 실전</span> 중심 강의입니다.</p>
     </div>
     <div class="kp">
-      실습은 차후 기회에 하고, 오늘은 제가 직접 사용하면서 <strong class="hb2">경험한 것 위주</strong>로 진행하겠습니다.
+      시간 관계상 실습보다는 제가 직접 사용하면서 <strong class="hb2">경험한 것 위주</strong>로 진행하겠습니다.
     </div>
   </div>
 </div>`},
@@ -532,27 +546,41 @@ const S = [
   </div>
 </div>`},
 
-/* ── 12. 전 세계 AI 수 ── */
-{id:"ai-count",r:()=>`
+/* ── 12. 전 세계 AI — 질문 ── */
+{id:"ai-question",r:()=>`
 <div></div>
 <div class="cl">
   <div style="font-size:3.5rem;margin-bottom:14px;opacity:.6" data-a style="animation-delay:0ms">🌐</div>
-  <h2 class="t" data-a style="animation-delay:80ms" style="margin-bottom:20px">전 세계에 AI가 몇 개 있을까요?</h2>
-  <div style="display:flex;gap:clamp(20px,5vw,60px);align-items:flex-end;flex-wrap:wrap;justify-content:center" data-a style="animation-delay:160ms">
+  <h2 class="t" data-a style="animation-delay:80ms" style="margin-bottom:16px">전 세계에 AI가<br>몇 개 있을까요?</h2>
+  <p style="margin-top:12px;color:var(--text-2);font-size:clamp(1.1rem,1.5vw,1.4rem);font-weight:500" data-a style="animation-delay:160ms">
+    한번 생각해 보세요. 몇 개 정도 있을 것 같으세요?
+  </p>
+  <div class="g" style="margin-top:24px;max-width:500px;text-align:center" data-a style="animation-delay:240ms">
+    <h3>허깅페이스 (Hugging Face)</h3>
+    <p>전 세계 연구자와 개발자들이 AI 모델을 올리고 공유하는 플랫폼</p>
+    <p style="margin-top:8px;color:var(--text-3);font-size:.95rem">→ 다음 슬라이드에서 답을 확인합니다</p>
+  </div>
+</div>`},
+
+/* ── 13. 전 세계 AI — 답 ── */
+{id:"ai-count",r:()=>`
+<div></div>
+<div class="cl">
+  <h2 class="t" data-a style="animation-delay:0ms" style="margin-bottom:20px">허깅페이스 기준</h2>
+  <div style="display:flex;gap:clamp(24px,6vw,70px);align-items:flex-end;flex-wrap:wrap;justify-content:center" data-a style="animation-delay:120ms">
     <div style="text-align:center">
-      <div style="font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;color:var(--amber);line-height:1">200만+</div>
-      <div class="sl">모델</div>
+      <div style="font-size:clamp(3rem,6vw,5.5rem);font-weight:900;color:var(--amber);line-height:1">200만+</div>
+      <div class="sl" style="font-size:1.1rem">모델</div>
     </div>
     <div style="text-align:center">
-      <div style="font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;color:var(--blue);line-height:1">1,100만</div>
-      <div class="sl">사용자</div>
+      <div style="font-size:clamp(3rem,6vw,5.5rem);font-weight:900;color:var(--blue);line-height:1">1,100만</div>
+      <div class="sl" style="font-size:1.1rem">사용자</div>
     </div>
     <div style="text-align:center">
-      <div style="font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;color:var(--amber);line-height:1">300만+</div>
-      <div class="sl">2026년 전망</div>
+      <div style="font-size:clamp(3rem,6vw,5.5rem);font-weight:900;color:var(--amber);line-height:1">300만+</div>
+      <div class="sl" style="font-size:1.1rem">2026년 전망</div>
     </div>
   </div>
-  <p style="margin-top:16px;color:var(--text-3);font-size:.9rem;font-weight:600" data-a style="animation-delay:240ms">Hugging Face 기준</p>
 </div>`},
 
 /* ── 13. 파운데이션 모델이란? ── */
@@ -565,21 +593,21 @@ const S = [
 <div class="g3" data-a style="animation-delay:180ms">
   <div class="g gc-card" style="text-align:center">
     <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal)"></div>
-    <p style="font-size:.82rem;color:var(--text-3);font-weight:600;margin-bottom:4px">OpenAI</p>
-    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem);margin-bottom:12px">ChatGPT</h3>
-    <div style="width:48px;height:48px;border-radius:50%;background:rgba(52,211,153,.12);margin:0 auto"></div>
+    <img class="logo-img logo-img-lg" src="img/chatgpt_logo.png" alt="ChatGPT" style="margin:0 auto 10px">
+    <p style="font-size:.9rem;color:var(--text-3);font-weight:600;margin-bottom:4px">OpenAI</p>
+    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem)">ChatGPT</h3>
   </div>
   <div class="g gc-card" style="text-align:center">
     <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue)"></div>
-    <p style="font-size:.82rem;color:var(--text-3);font-weight:600;margin-bottom:4px">Google</p>
-    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem);margin-bottom:12px">Gemini</h3>
-    <div style="width:48px;height:48px;border-radius:50%;background:rgba(91,154,255,.12);margin:0 auto"></div>
+    <img class="logo-img logo-img-lg" src="img/gemini_logo.png" alt="Gemini" style="margin:0 auto 10px">
+    <p style="font-size:.9rem;color:var(--text-3);font-weight:600;margin-bottom:4px">Google</p>
+    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem)">Gemini</h3>
   </div>
   <div class="g gc-card" style="text-align:center">
     <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)"></div>
-    <p style="font-size:.82rem;color:var(--text-3);font-weight:600;margin-bottom:4px">Anthropic</p>
-    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem);margin-bottom:12px">Claude</h3>
-    <div style="width:48px;height:48px;border-radius:50%;background:rgba(251,191,36,.12);margin:0 auto"></div>
+    <img class="logo-img logo-img-lg" src="img/claude_logo.png" alt="Claude" style="margin:0 auto 10px">
+    <p style="font-size:.9rem;color:var(--text-3);font-weight:600;margin-bottom:4px">Anthropic</p>
+    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem)">Claude</h3>
   </div>
 </div>
 <div style="text-align:center;margin-top:4px;color:var(--text-2);font-size:clamp(.9rem,1.1vw,1.1rem);font-weight:600" data-a style="animation-delay:250ms">
@@ -624,12 +652,12 @@ const S = [
   <table class="ctbl">
     <thead><tr><th>업무 상황</th><th>추천 AI</th><th>이유</th></tr></thead>
     <tbody>
-      <tr><td>아이디어 브레인스토밍</td><td><strong class="htl">ChatGPT</strong></td><td>다양한 아이디어를 빠르게 뽑아냄</td></tr>
-      <tr><td>빠른 검색·최신 정보</td><td><strong class="hb2">Gemini</strong></td><td>구글 연동, 최신 정보 접근에 강함</td></tr>
-      <tr><td>공문·보도자료 작성</td><td><strong class="hv">Claude</strong></td><td>한국어 문체 정돈, 긴 문서 구조화</td></tr>
-      <tr><td>데이터 분석·시각화</td><td><strong class="htl">ChatGPT</strong></td><td>코드 실행 환경 내장, 차트 생성</td></tr>
-      <tr><td>긴 문서 분석·요약</td><td><strong class="hv">Claude</strong></td><td>긴 문서 처리 능력 우수</td></tr>
-      <tr><td>엑셀·데이터 정리</td><td><strong class="htl">ChatGPT</strong></td><td>파일 업로드 후 바로 처리</td></tr>
+      <tr><td>아이디어 브레인스토밍</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/chatgpt_logo.png" alt=""><strong class="htl">ChatGPT</strong></span></td><td>다양한 아이디어를 빠르게 뽑아냄</td></tr>
+      <tr><td>빠른 검색·최신 정보</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/gemini_logo.png" alt=""><strong class="hb2">Gemini</strong></span></td><td>구글 연동, 최신 정보 접근에 강함</td></tr>
+      <tr><td>공문·보도자료 작성</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/claude_logo.png" alt=""><strong class="hv">Claude</strong></span></td><td>한국어 문체 정돈, 긴 문서 구조화</td></tr>
+      <tr><td>데이터 분석·시각화</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/chatgpt_logo.png" alt=""><strong class="htl">ChatGPT</strong></span></td><td>코드 실행 환경 내장, 차트 생성</td></tr>
+      <tr><td>긴 문서 분석·요약</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/claude_logo.png" alt=""><strong class="hv">Claude</strong></span></td><td>긴 문서 처리 능력 우수</td></tr>
+      <tr><td>엑셀·데이터 정리</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/chatgpt_logo.png" alt=""><strong class="htl">ChatGPT</strong></span></td><td>파일 업로드 후 바로 처리</td></tr>
     </tbody>
   </table>
 </div>`},
@@ -644,19 +672,22 @@ const S = [
 <div data-a style="animation-delay:180ms">
   <div class="rf" style="margin-bottom:14px">
     <div class="g" style="text-align:center">
-      <span class="chip ct" style="margin-bottom:8px">1 &nbsp;ChatGPT</span>
+      <img class="logo-img-sm" src="img/chatgpt_logo.png" alt="" style="margin:0 auto">
+      <span class="chip ct" style="margin-bottom:4px">1 &nbsp;ChatGPT</span>
       <h3>아이디어 도출</h3>
       <p style="margin-top:8px;font-size:.88rem">"북구 인구감소 대응 방안을 10가지 제안해줘"</p>
     </div>
     <div class="ra">→</div>
     <div class="g" style="text-align:center">
-      <span class="chip cb" style="margin-bottom:8px">2 &nbsp;Gemini</span>
+      <img class="logo-img-sm" src="img/gemini_logo.png" alt="" style="margin:0 auto">
+      <span class="chip cb" style="margin-bottom:4px">2 &nbsp;Gemini</span>
       <h3>분석·검토</h3>
       <p style="margin-top:8px;font-size:.88rem">"실현 가능성과 예산 효율성 기준으로 분석해줘"</p>
     </div>
     <div class="ra">→</div>
     <div class="g" style="text-align:center">
-      <span class="chip cv" style="margin-bottom:8px">3 &nbsp;Claude</span>
+      <img class="logo-img-sm" src="img/claude_logo.png" alt="" style="margin:0 auto">
+      <span class="chip cv" style="margin-bottom:4px">3 &nbsp;Claude</span>
       <h3>공문서 완성</h3>
       <p style="margin-top:8px;font-size:.88rem">"업무계획서를 작성해줘"</p>
     </div>
