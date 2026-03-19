@@ -72,8 +72,7 @@
       z-index:1;
     }
 
-    .slide{position:absolute;inset:0;z-index:2;padding:clamp(16px,2.2vw,32px);display:grid;grid-template-rows:auto 1fr;gap:10px;will-change:transform,opacity;outline:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
-    .slide > *:nth-child(2){align-self:start}
+    .slide{position:absolute;inset:0;z-index:2;padding:clamp(18px,2.8vw,40px);display:grid;grid-template-rows:auto 1fr;gap:18px;will-change:transform,opacity;outline:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
     .slide.aR{animation:sR .55s var(--ease) both}
     .slide.aL{animation:sL .55s var(--ease) both}
     @keyframes sR{from{transform:translateX(50px);opacity:0}to{transform:none;opacity:1}}
@@ -87,16 +86,16 @@
     .kdot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:pulse 2s ease-in-out infinite}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
 
-    h2.t{font-size:clamp(2rem,5vw,4.8rem);line-height:1.06;letter-spacing:-.035em;font-weight:800;text-wrap:balance}
+    h2.t{font-size:clamp(2rem,5vw,4.8rem);line-height:1.06;letter-spacing:-.035em;font-weight:800;text-wrap:balance;margin-top:8px}
     .gt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .gw{background:var(--grad-warm);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .gc{background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .sub{margin:6px 0 0;font-size:clamp(1.1rem,1.8vw,1.55rem);font-weight:500;color:var(--text-2);line-height:1.5}
+    .sub{margin:6px 0 0;font-size:clamp(1.2rem,1.9vw,1.65rem);font-weight:500;color:var(--text-2);line-height:1.5}
 
     .g{background:var(--bg-glass);border:var(--border-g);border-radius:var(--r-md);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:14px 16px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s ease}
     .g:hover{background:var(--bg-glass-hover);transform:translateY(-1px);box-shadow:var(--glow-b)}
-    .g h3{font-size:clamp(1.15rem,1.5vw,1.5rem);font-weight:700;margin:0 0 5px;line-height:1.25}
-    .g p,.g li{font-size:clamp(1rem,1.15vw,1.2rem);line-height:1.5;color:var(--text-2);font-weight:450}
+    .g h3{font-size:clamp(1.35rem,1.7vw,1.75rem);font-weight:700;margin:0 0 5px;line-height:1.25}
+    .g p,.g li{font-size:clamp(1.15rem,1.35vw,1.4rem);line-height:1.5;color:var(--text-2);font-weight:450}
     .g ul{margin:0;padding-left:1.15rem;display:grid;gap:3px}
 
     .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -111,24 +110,24 @@
     .cr{background:rgba(251,113,133,.13);color:var(--rose)}
     .ca{background:rgba(251,191,36,.13);color:var(--amber)}
 
-    .kp{padding:12px 16px;border-radius:var(--r-md);background:rgba(91,154,255,.07);border-left:3px solid var(--blue);font-size:clamp(1rem,1.2vw,1.2rem);font-weight:600;line-height:1.45;color:var(--text)}
+    .kp{padding:14px 18px;border-radius:var(--r-md);background:rgba(91,154,255,.07);border-left:3px solid var(--blue);font-size:clamp(1.15rem,1.4vw,1.4rem);font-weight:600;line-height:1.45;color:var(--text)}
     .kp-w{background:rgba(251,113,133,.07);border-left-color:var(--rose)}
 
     .hb{padding:16px 22px;border-radius:var(--r-lg);background:var(--grad-hero);position:relative;overflow:hidden}
     .hb::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(255,255,255,.03) 10px,rgba(255,255,255,.03) 20px);pointer-events:none}
-    .ht{font-size:clamp(1.3rem,2vw,1.9rem);font-weight:800;line-height:1.35;position:relative;z-index:1}
+    .ht{font-size:clamp(1.4rem,2.2vw,2.1rem);font-weight:800;line-height:1.35;position:relative;z-index:1}
     .hs{font-size:clamp(.85rem,1vw,1rem);font-weight:500;color:rgba(255,255,255,.65);margin-top:6px;position:relative;z-index:1}
 
     .qb{position:relative;padding:14px 18px;border-radius:var(--r-md);background:var(--bg-glass);border:var(--border-g)}
     .qb::before{content:"\201C";position:absolute;top:-8px;left:10px;font-size:3rem;font-weight:900;color:rgba(91,154,255,.18);font-family:Georgia,serif;line-height:1}
-    .qt{font-size:clamp(1.05rem,1.4vw,1.35rem);font-weight:700;line-height:1.45}
+    .qt{font-size:clamp(1.3rem,1.8vw,1.7rem);font-weight:700;line-height:1.45}
 
     .hb2{color:var(--blue)}.hv{color:var(--violet)}.htl{color:var(--teal)}.hr{color:var(--rose)}.ha{color:var(--amber)}
 
     .dv{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:6px 0}
 
     /* ── Meta items ── */
-    .mi{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);font-weight:600;font-size:clamp(.95rem,1.08vw,1.08rem);transition:background .2s ease}
+    .mi{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);font-weight:600;font-size:clamp(1.1rem,1.25vw,1.3rem);transition:background .2s ease}
     .mi:hover{background:var(--bg-glass-hover)}
     .micon{width:30px;height:30px;display:inline-grid;place-items:center;border-radius:8px;background:var(--bg-glass-hover);font-size:.85rem;flex-shrink:0}
 
@@ -147,7 +146,7 @@
     /* ── Table ── */
     .ctbl{width:100%;border-collapse:separate;border-spacing:0 5px}
     .ctbl th{padding:8px 12px;font-size:clamp(.73rem,.82vw,.82rem);font-weight:700;color:var(--text-3);text-align:left;text-transform:uppercase;letter-spacing:.04em}
-    .ctbl td{padding:10px 14px;font-size:clamp(1rem,1.1vw,1.15rem);font-weight:500;color:var(--text-2);background:var(--bg-glass);line-height:1.4}
+    .ctbl td{padding:12px 16px;font-size:clamp(1.12rem,1.3vw,1.35rem);font-weight:500;color:var(--text-2);background:var(--bg-glass);line-height:1.4}
     .ctbl tr td:first-child{border-radius:10px 0 0 10px;font-weight:700;color:var(--text)}
     .ctbl tr td:last-child{border-radius:0 10px 10px 0}
 
@@ -186,12 +185,12 @@
     .cl{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center}
 
     /* ── Closing ── */
-    .closing-t{font-size:clamp(2.2rem,5.5vw,5.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;text-align:center}
-    .closing-s{font-size:clamp(.95rem,1.4vw,1.3rem);font-weight:500;color:var(--text-2);max-width:560px;line-height:1.6;text-align:center}
+    .closing-t{font-size:clamp(3rem,7vw,7rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;text-align:center}
+    .closing-s{font-size:clamp(1.2rem,1.8vw,1.7rem);font-weight:500;color:var(--text-2);max-width:600px;line-height:1.6;text-align:center}
 
     /* ── Recap ── */
     .rl{display:grid;gap:7px;width:100%;max-width:520px}
-    .ri{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);font-weight:600;font-size:clamp(1rem,1.2vw,1.2rem);transition:background .2s ease,transform .2s var(--ease)}
+    .ri{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--r-sm);background:var(--bg-glass);border:var(--border-g);font-weight:600;font-size:clamp(1.1rem,1.3vw,1.3rem);transition:background .2s ease,transform .2s var(--ease)}
     .ri:hover{background:var(--bg-glass-hover);transform:translateX(3px)}
     .rc{width:22px;height:22px;display:inline-grid;place-items:center;border-radius:6px;background:rgba(91,154,255,.13);color:var(--blue);font-size:.65rem;font-weight:900;flex-shrink:0}
 
@@ -226,8 +225,8 @@
     .logo-img{width:56px;height:56px;border-radius:14px;object-fit:contain;background:rgba(255,255,255,.9);padding:5px;flex-shrink:0}
     .logo-img-lg{width:72px;height:72px;border-radius:16px;padding:6px}
     .logo-img-sm{width:40px;height:40px;border-radius:10px;padding:4px}
-    .photo{width:100%;max-height:220px;object-fit:cover;border-radius:var(--r-sm);border:var(--border-g)}
-    .photo-sm{max-height:160px}
+    .photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;border-radius:var(--r-sm);border:var(--border-g)}
+    .photo-sm{min-height:200px}
     .model-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
 
     /* ── Responsive ── */
@@ -297,30 +296,29 @@ const S = [
 
 /* ── 2. 강사 소개 ── */
 {id:"instructor",r:()=>`
-<div>
+<div style="margin-bottom:6px">
   <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>강사 소개</span>
-  <h2 class="t" data-a style="animation-delay:60ms"><span class="gt">이홍우</span> 주무관</h2>
+  <h2 class="t" data-a style="animation-delay:60ms;margin-top:10px"><span class="gt">이홍우</span> 주무관</h2>
 </div>
-<div class="g2" data-a style="animation-delay:150ms">
-  <div class="g">
-    <div style="display:grid;gap:6px">
-      <div class="mi"><span class="micon">🏛️</span><span>현재 울산교육청 정책관실 정책기획팀 (정부혁신과제, 국민제안 담당)</span></div>
-      <div class="mi"><span class="micon">📋</span><span>대외협력팀 3년 (의회·교육기부 업무)</span></div>
-      <div class="mi" style="background:rgba(91,154,255,.08)"><span class="micon" style="background:rgba(91,154,255,.15)">🏆</span><span><strong class="hb2">울산 관공서 최초</strong> AI 챔피언 블루 인증 취득</span></div>
-      <div class="mi"><span class="micon">🐳</span><span>울산교육청 AI 학습 연구 동아리 '고래.I' 강사</span></div>
-      <div class="mi"><span class="micon">📊</span><span>교육부 주관 데이터리더 활동</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1" data-a style="animation-delay:150ms">
+  <div class="g" style="display:flex;flex-direction:column;justify-content:center;gap:6px">
+    <div class="mi"><span class="micon">🏛️</span><span>현재 울산교육청 정책관실 정책기획팀 (정부혁신과제, 국민제안 담당)</span></div>
+    <div class="mi"><span class="micon">📋</span><span>대외협력팀 3년 (의회·교육기부 업무)</span></div>
+    <div class="mi" style="background:rgba(91,154,255,.08)"><span class="micon" style="background:rgba(91,154,255,.15)">🏆</span><span><strong class="hb2">울산 관공서 최초</strong> AI 챔피언 블루 인증 취득</span></div>
+    <div class="mi"><span class="micon">🐳</span><span>울산교육청 AI 학습 연구 동아리 '고래.I' 강사</span></div>
+    <div class="mi"><span class="micon">📊</span><span>교육부 주관 데이터리더 활동</span></div>
+    <div class="dv"></div>
+    <div class="mi" style="background:rgba(52,211,153,.06)"><span class="micon" style="background:rgba(52,211,153,.12)">🐳</span><span><strong class="htl">고래.I</strong> — 울산교육청 AI 학습 연구 동아리 (113명, 17개 부서 참여)</span></div>
+    <div class="dv"></div>
+    <div class="kp" style="font-size:1.05rem">
+      <strong>오늘 할 일</strong> — AI 챔피언이 무엇인지, 어떻게 준비하는지, 그리고 바로 활용할 수 있는 AI 도구 이야기
     </div>
   </div>
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div class="g" style="padding:0;overflow:hidden">
-      <img class="photo" src="img/leehongwoo.jpeg" alt="이홍우 강사" style="border-radius:var(--r-md);max-height:200px">
-    </div>
-    <div class="qb">
-      <p class="qt">경험에서 나온 이야기 — <span class="hb2">이론이 아닌 실전</span> 중심 강의입니다.</p>
-    </div>
-    <div class="kp">
-      시간 관계상 실습보다는 제가 직접 사용하면서 <strong class="hb2">경험한 것 위주</strong>로 진행하겠습니다.
-    </div>
+  <div style="overflow:hidden;border-radius:var(--r-md);border:var(--border-g);height:400px">
+    <img src="img/leehongwoo.jpeg" alt="이홍우 강사" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
+  </div>
+  <div class="qb" style="grid-column:1/-1">
+    <p class="qt">시간 관계상 실습보다는 제가 직접 사용하면서 <strong class="hb2">경험한 것 위주</strong>로 진행하겠습니다.</p>
   </div>
 </div>`},
 
@@ -341,12 +339,13 @@ const S = [
 </div>
 <div class="g2" data-a style="animation-delay:150ms">
   <div class="g">
-    <p style="font-size:clamp(1.1rem,1.5vw,1.5rem);font-weight:800;color:var(--text);margin-bottom:4px">「북구, 전직원 AI 역량강화 나선다」</p>
-    <p style="font-size:.85rem;color:var(--text-3);margin-bottom:14px">— 한국시사경제, 2026.02.03</p>
+    <p style="font-size:clamp(1.2rem,1.6vw,1.6rem);font-weight:800;color:var(--text);margin-bottom:4px">「북구, 전직원 AI 역량강화 나선다」</p>
+    <p style="font-size:.9rem;color:var(--text-3);margin-bottom:12px">— 한국시사경제, 2026.02.03</p>
     <ul>
-      <li>울산 북구, 공공행정 현장 AI 활용 확대에 따라 직원 AI 문해력 향상 추진</li>
-      <li>부서마다 AI 활용 문화 확산을 주도하는 <strong class="hb2">AI 리더</strong> 지정 계획</li>
-      <li>행안부 주관 <strong class="hv">'AI 챔피언'</strong> 인증 취득 추진</li>
+      <li>"울산 북구는 <strong class="hb2">공공행정 현장에도 AI 활용이 확대</strong>됨에 따라 직원들의 <strong class="hb2">AI 문해력</strong>을 높이기 위한 역량강화에 나선다."</li>
+      <li>"북구는 우선 부서마다 AI 활용 문화 확산을 주도하는 <strong class="hb2">AI 리더를 지정</strong>할 계획이다."</li>
+      <li>"행정안전부가 주관하는 <strong class="hv">'AI 챔피언' 인증 취득</strong>을 추진하기로 했다."</li>
+      <li>"북구는 <strong class="ha">부서별 1명 이상</strong> AI 챔피언 인증 취득을 목표로 교육 등을 추진할 계획이다."</li>
     </ul>
   </div>
   <div style="display:flex;flex-direction:column;gap:12px">
@@ -531,31 +530,31 @@ const S = [
 </div>
 <div class="chg" data-a style="animation-delay:150ms">
   <div class="g chg-card">
-    <span class="chg-icon">💻</span>
+    <span class="chg-icon" style="width:48px;height:48px;font-size:1.5rem">💻</span>
     <div>
-      <h3>코딩 거부감 해소</h3>
-      <p>파이썬으로 엑셀 데이터 분석 → 바이브코딩 시대 적응</p>
+      <h3 style="font-size:clamp(1.5rem,2vw,2rem)">코딩 거부감 해소</h3>
+      <p style="font-size:clamp(1.15rem,1.4vw,1.45rem)">파이썬으로 엑셀 데이터 분석 → 바이브코딩 시대 적응</p>
     </div>
   </div>
   <div class="g chg-card">
-    <span class="chg-icon">🧠</span>
+    <span class="chg-icon" style="width:48px;height:48px;font-size:1.5rem">🧠</span>
     <div>
-      <h3>AI 두려움 제거</h3>
-      <p>RAG, n8n, 버블, 올라마, 수파베이스 — 한 번 해본 것의 힘</p>
+      <h3 style="font-size:clamp(1.5rem,2vw,2rem)">AI 두려움 제거</h3>
+      <p style="font-size:clamp(1.15rem,1.4vw,1.45rem)">RAG, n8n, 버블, 올라마, 수파베이스 — 한 번 해본 것의 힘</p>
     </div>
   </div>
   <div class="g chg-card">
-    <span class="chg-icon">🔧</span>
+    <span class="chg-icon" style="width:48px;height:48px;font-size:1.5rem">🔧</span>
     <div>
-      <h3>실제 서비스 개발</h3>
-      <p>재난안전 학교조회 시스템, 정책뉴스 한눈에 서비스</p>
+      <h3 style="font-size:clamp(1.5rem,2vw,2rem)">실제 서비스 개발</h3>
+      <p style="font-size:clamp(1.15rem,1.4vw,1.45rem)">재난안전 학교조회 시스템, 정책뉴스 한눈에, 업무분장 탐색기</p>
     </div>
   </div>
   <div class="g chg-card">
     <span class="chg-icon">💡</span>
     <div>
-      <h3>아이디어 실현 능력</h3>
-      <p>생각하면 그대로 만들 수 있는 시대가 된 것</p>
+      <h3 style="font-size:clamp(1.5rem,2vw,2rem)">아이디어 실현 능력</h3>
+      <p style="font-size:clamp(1.15rem,1.4vw,1.45rem)">생각하면 그대로 만들 수 있는 시대가 된 것</p>
     </div>
   </div>
 </div>`},
@@ -602,36 +601,38 @@ const S = [
 <div>
   <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>파운데이션 모델</span>
   <h2 class="t" data-a style="animation-delay:60ms">파운데이션 모델이란<span class="gc">?</span></h2>
-  <p class="sub" data-a style="animation-delay:120ms">방대한 데이터로 학습해 다양한 작업을 수행할 수 있는 거대 AI 모델</p>
+  <p class="sub" data-a style="animation-delay:120ms">200만 개 AI 중에서, 방대한 데이터로 학습해 다양한 작업을 수행할 수 있는 <strong class="hb2">거대 AI 모델</strong><br>AI 서비스의 기반, 즉 <strong>'기초(Foundation)'</strong> 역할을 하는 모델</p>
 </div>
-<div class="g3" data-a style="animation-delay:180ms">
-  <div class="g gc-card" style="text-align:center">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal)"></div>
-    <img class="logo-img logo-img-lg" src="img/chatgpt_logo.png" alt="ChatGPT" style="margin:0 auto 10px">
-    <p style="font-size:.9rem;color:var(--text-3);font-weight:600;margin-bottom:4px">OpenAI</p>
-    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem)">ChatGPT</h3>
-    <div class="dv" style="margin:10px 0 8px"></div>
-    <p style="font-size:clamp(.82rem,.95vw,.95rem);color:var(--text-2);line-height:1.55;text-align:left">처음 아이디어 정리와 초안 생성이 빠름 · 다양한 서비스 연동</p>
+<div data-a style="animation-delay:180ms;align-self:center">
+  <div class="g3" style="margin-bottom:12px">
+    <div class="g gc-card" style="text-align:center">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal)"></div>
+      <img class="logo-img logo-img-lg" src="img/chatgpt_logo.png" alt="ChatGPT" style="margin:0 auto 10px">
+      <p style="font-size:1rem;color:var(--text-3);font-weight:600;margin-bottom:4px">OpenAI</p>
+      <h3 style="font-size:clamp(1.6rem,2.2vw,2.2rem)">ChatGPT</h3>
+      <div class="dv" style="margin:10px 0 8px"></div>
+      <p style="font-size:clamp(1rem,1.1vw,1.15rem);color:var(--text-2);line-height:1.55;text-align:left">아이디어 정리와 초안 생성이 빠름 · 다양한 서비스 연동 · 확장 생태계</p>
+    </div>
+    <div class="g gc-card" style="text-align:center">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue)"></div>
+      <img class="logo-img logo-img-lg" src="img/gemini_logo.png" alt="Gemini" style="margin:0 auto 10px">
+      <p style="font-size:1rem;color:var(--text-3);font-weight:600;margin-bottom:4px">Google</p>
+      <h3 style="font-size:clamp(1.6rem,2.2vw,2.2rem)">Gemini</h3>
+      <div class="dv" style="margin:10px 0 8px"></div>
+      <p style="font-size:clamp(1rem,1.1vw,1.15rem);color:var(--text-2);line-height:1.55;text-align:left">긴 문서 분석·요약에 강함 · 이미지·영상 맥락 파악 · 구글 연동</p>
+    </div>
+    <div class="g gc-card" style="text-align:center">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)"></div>
+      <img class="logo-img logo-img-lg" src="img/claude_logo.png" alt="Claude" style="margin:0 auto 10px">
+      <p style="font-size:1rem;color:var(--text-3);font-weight:600;margin-bottom:4px">Anthropic</p>
+      <h3 style="font-size:clamp(1.6rem,2.2vw,2.2rem)">Claude</h3>
+      <div class="dv" style="margin:10px 0 8px"></div>
+      <p style="font-size:clamp(1rem,1.1vw,1.15rem);color:var(--text-2);line-height:1.55;text-align:left">데이터 분석·시각화 · 엑셀 데이터 정리 · 복잡한 지시를 누락 없이 수행</p>
+    </div>
   </div>
-  <div class="g gc-card" style="text-align:center">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue)"></div>
-    <img class="logo-img logo-img-lg" src="img/gemini_logo.png" alt="Gemini" style="margin:0 auto 10px">
-    <p style="font-size:.9rem;color:var(--text-3);font-weight:600;margin-bottom:4px">Google</p>
-    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem)">Gemini</h3>
-    <div class="dv" style="margin:10px 0 8px"></div>
-    <p style="font-size:clamp(.82rem,.95vw,.95rem);color:var(--text-2);line-height:1.55;text-align:left">이미지·차트·영상 맥락 파악이 빠름 · 구글 연동</p>
+  <div class="kp" style="font-size:clamp(1.1rem,1.3vw,1.35rem)">
+    이 파운데이션 모델들은 <strong class="hr">전부 미국 기업</strong> 것입니다. 그래서 지금 우리가 현실적으로 활용할 수 있는 도구는 이 <strong class="hb2">세 가지</strong>이고, 이걸 잘 활용하는 게 핵심입니다.
   </div>
-  <div class="g gc-card" style="text-align:center">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--amber)"></div>
-    <img class="logo-img logo-img-lg" src="img/claude_logo.png" alt="Claude" style="margin:0 auto 10px">
-    <p style="font-size:.9rem;color:var(--text-3);font-weight:600;margin-bottom:4px">Anthropic</p>
-    <h3 style="font-size:clamp(1.5rem,2.2vw,2.2rem)">Claude</h3>
-    <div class="dv" style="margin:10px 0 8px"></div>
-    <p style="font-size:clamp(.82rem,.95vw,.95rem);color:var(--text-2);line-height:1.55;text-align:left">업무 톤에 맞는 자연스러운 보고서 작성 · 복잡한 지시 수행</p>
-  </div>
-</div>
-<div style="text-align:center;margin-top:4px;color:var(--text-2);font-size:clamp(.9rem,1.1vw,1.1rem);font-weight:600" data-a style="animation-delay:250ms">
-  이 세 가지가 현재 가장 널리 쓰이는 파운데이션 모델입니다
 </div>`},
 
 /* ── 15. AI 주권 — 독자 파운데이션 모델 ── */
@@ -639,50 +640,35 @@ const S = [
 <div>
   <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>AI 주권</span>
   <h2 class="t" data-a style="animation-delay:60ms">AI 주권 — <span class="gw">독자 파운데이션 모델</span></h2>
+  <p class="sub" data-a style="animation-delay:120ms">파운데이션 모델이 <strong class="hr">전부 미국 기업</strong> 것 → 우리나라에서 강조하는 <strong class="hb2">소버린 AI(Sovereign AI)</strong></p>
 </div>
 <div data-a style="animation-delay:150ms">
-  <div class="g2" style="margin-bottom:12px">
+  <div class="g2" style="margin-bottom:10px">
     <div class="g" style="background:rgba(91,154,255,.06)">
-      <h3 style="color:var(--blue)">독파모 프로젝트</h3>
-      <p><strong class="ha">5,300억 원</strong> 투입</p>
-      <p>2027년까지 GPT 95% 수준 목표</p>
+      <h3 style="color:var(--blue);font-size:clamp(1.4rem,1.8vw,1.8rem)">독파모 프로젝트</h3>
+      <p style="font-size:clamp(1.1rem,1.3vw,1.35rem)">'독자 AI 파운데이션 모델' 프로젝트</p>
+      <p style="font-size:clamp(1.1rem,1.3vw,1.35rem)">정부 <strong class="ha">5,300억 원</strong> 투입</p>
+      <p style="font-size:clamp(1.1rem,1.3vw,1.35rem)">2027년까지 GPT·Gemini <strong class="hb2">95% 이상</strong> 성능 목표</p>
+      <p style="font-size:clamp(1.1rem,1.3vw,1.35rem)">처음 <strong>10개 팀</strong>이 도전</p>
     </div>
     <div class="g">
-      <h3>현재 살아남은 3팀</h3>
-      <p style="color:var(--blue);font-weight:700;margin-bottom:4px">LG AI연구원 | SK텔레콤 | 업스테이지</p>
-      <p style="color:var(--text-3);font-size:.88rem">네이버·카카오·KT·NC 모두 탈락 또는 포기</p>
+      <h3 style="font-size:clamp(1.4rem,1.8vw,1.8rem)">그런데 상황이...</h3>
+      <ul style="font-size:clamp(1.05rem,1.2vw,1.25rem)">
+        <li><strong class="hr">네이버클라우드</strong> — 독자 개발 기준 미달 탈락 (알리바바 큐웬 모델 사용)</li>
+        <li><strong class="hr">NC AI</strong> — 점수 미달 탈락</li>
+        <li>패자부활전에 <strong>네이버, NC, 카카오</strong> 모두 재도전 포기</li>
+        <li><strong>KT</strong>도 추가 공모 참여 포기</li>
+      </ul>
+      <div class="dv" style="margin:8px 0"></div>
+      <p style="font-size:clamp(1.15rem,1.35vw,1.4rem)"><strong class="hb2">살아남은 3팀:</strong> <span style="color:var(--blue);font-weight:700">LG AI연구원 | SK텔레콤 | 업스테이지</span></p>
     </div>
   </div>
-  <div class="hb" style="text-align:center;padding:18px 24px">
-    <div class="ht" style="font-size:clamp(.95rem,1.4vw,1.3rem)">
-      파운데이션 모델을 만드는 건 그만큼 어려운 일<br>
-      지금 우리가 쓸 수 있는 현실적 도구는 <strong>ChatGPT · Gemini · Claude</strong>
-    </div>
+  <div class="kp" style="font-size:clamp(1.15rem,1.4vw,1.4rem)">
+    그만큼 파운데이션 모델을 만드는 건 어려운 일 → <strong class="hb2">지금 우리가 쓸 수 있는 현실적 도구는 ChatGPT · Gemini · Claude</strong> 이 세 가지를 잘 활용하는 게 중요합니다.
   </div>
 </div>`},
 
-/* ── 16. AI 도구 비교 ── */
-{id:"compare",r:()=>`
-<div>
-  <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>도구 비교</span>
-  <h2 class="t" data-a style="animation-delay:60ms">AI 도구 비교 — <span class="gt">상황별 활용법</span></h2>
-  <p class="sub" data-a style="animation-delay:120ms" style="color:var(--blue);font-weight:600">핵심: 하나만 고집하지 말고, 상황에 맞는 도구를 골라 쓰는 게 실력</p>
-</div>
-<div data-a style="animation-delay:180ms">
-  <table class="ctbl">
-    <thead><tr><th>업무 상황</th><th>추천 AI</th><th>이유</th></tr></thead>
-    <tbody>
-      <tr><td>아이디어 브레인스토밍</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/chatgpt_logo.png" alt=""><strong class="htl">ChatGPT</strong></span></td><td>다양한 아이디어를 빠르게 뽑아냄</td></tr>
-      <tr><td>빠른 검색·최신 정보</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/gemini_logo.png" alt=""><strong class="hb2">Gemini</strong></span></td><td>구글 연동, 최신 정보 접근에 강함</td></tr>
-      <tr><td>공문·보도자료 작성</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/claude_logo.png" alt=""><strong class="hv">Claude</strong></span></td><td>한국어 문체 정돈, 긴 문서 구조화</td></tr>
-      <tr><td>데이터 분석·시각화</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/chatgpt_logo.png" alt=""><strong class="htl">ChatGPT</strong></span></td><td>코드 실행 환경 내장, 차트 생성</td></tr>
-      <tr><td>긴 문서 분석·요약</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/claude_logo.png" alt=""><strong class="hv">Claude</strong></span></td><td>긴 문서 처리 능력 우수</td></tr>
-      <tr><td>엑셀·데이터 정리</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/chatgpt_logo.png" alt=""><strong class="htl">ChatGPT</strong></span></td><td>파일 업로드 후 바로 처리</td></tr>
-    </tbody>
-  </table>
-</div>`},
-
-/* ── 17. AI 3대장 상세 소개 ── */
+/* ── 16. AI 3대장 상세 소개 ── */
 {id:"ai-detail",r:()=>`
 <div>
   <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>AI 3대장</span>
@@ -704,25 +690,46 @@ const S = [
   <div class="g">
     <div class="model-head">
       <img class="logo-img" src="img/gemini_logo.png" alt="Gemini">
-      <div><h3 style="margin:0">Gemini</h3><p style="margin:0;font-size:.9rem">멀티모달 분석 특화</p></div>
+      <div><h3 style="margin:0">Gemini</h3><p style="margin:0;font-size:.9rem">긴 문서 분석 · 멀티모달 특화</p></div>
     </div>
     <ul>
+      <li>긴 문서 분석·요약 능력이 뛰어남</li>
       <li>이미지·차트·영상 맥락 파악이 빠름</li>
       <li>구글 연동으로 최신 정보 접근 강점</li>
-      <li>대용량 자료 읽고 구조화하기 유리</li>
     </ul>
   </div>
   <div class="g">
     <div class="model-head">
       <img class="logo-img" src="img/claude_logo.png" alt="Claude">
-      <div><h3 style="margin:0">Claude</h3><p style="margin:0;font-size:.9rem">지시 이행 · 문서 완성도 특화</p></div>
+      <div><h3 style="margin:0">Claude</h3><p style="margin:0;font-size:.9rem">데이터 분석 · 시각화 특화</p></div>
     </div>
     <ul>
-      <li>업무 톤에 맞는 자연스러운 보고서 작성</li>
+      <li>데이터 분석·시각화가 깔끔하고 정확</li>
+      <li>엑셀 데이터 정리·가공에 강함</li>
       <li>복잡한 단계 지시를 누락 없이 수행</li>
-      <li>긴 문서 처리 및 구조화 능력 우수</li>
     </ul>
   </div>
+</div>`},
+
+/* ── 17. AI 도구 비교 ── */
+{id:"compare",r:()=>`
+<div>
+  <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>도구 비교</span>
+  <h2 class="t" data-a style="animation-delay:60ms">AI 도구 비교 — <span class="gt">상황별 활용법</span></h2>
+  <p class="sub" data-a style="animation-delay:120ms" style="color:var(--blue);font-weight:600">핵심: 하나만 고집하지 말고, 상황에 맞는 도구를 골라 쓰는 게 실력</p>
+</div>
+<div data-a style="animation-delay:180ms">
+  <table class="ctbl">
+    <thead><tr><th>업무 상황</th><th>추천 AI</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr><td>아이디어 브레인스토밍</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/chatgpt_logo.png" alt=""><strong class="htl">ChatGPT</strong></span></td><td>다양한 아이디어를 빠르게 뽑아냄</td></tr>
+      <tr><td>빠른 검색·최신 정보</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/gemini_logo.png" alt=""><strong class="hb2">Gemini</strong></span></td><td>구글 연동, 최신 정보 접근에 강함</td></tr>
+      <tr><td>공문·보도자료 작성</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/claude_logo.png" alt=""><strong class="hv">Claude</strong></span></td><td>업무 톤에 맞는 자연스러운 문서 작성</td></tr>
+      <tr><td>데이터 분석·시각화</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/claude_logo.png" alt=""><strong class="hv">Claude</strong></span></td><td>깔끔한 차트 생성, 정확한 분석</td></tr>
+      <tr><td>긴 문서 분석·요약</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/gemini_logo.png" alt=""><strong class="hb2">Gemini</strong></span></td><td>대용량 문서 처리·요약 능력 우수</td></tr>
+      <tr><td>엑셀·데이터 정리</td><td><span style="display:flex;align-items:center;gap:6px"><img class="logo-img-sm" src="img/claude_logo.png" alt=""><strong class="hv">Claude</strong></span></td><td>엑셀 업로드 후 정리·가공이 정확</td></tr>
+    </tbody>
+  </table>
 </div>`},
 
 /* ── 18. 상황별 실전 가이드 ── */
@@ -732,52 +739,15 @@ const S = [
   <h2 class="t" data-a style="animation-delay:60ms">업무 상황에 맞는 <span class="gt">최적 모델</span></h2>
 </div>
 <div class="g2" data-a style="animation-delay:150ms">
-  <div class="g"><h3>이미지·영상 해석 → <span class="hb2">Gemini</span></h3><p>사진 속 텍스트, 차트 의미, 영상 핵심 장면을 빠르게 추출</p></div>
-  <div class="g"><h3>보고서/기획서 작성 → <span class="hv">Claude</span></h3><p>문체와 형식을 지켜 자연스럽고 설득력 있는 문서 생성</p></div>
+  <div class="g"><h3>데이터 분석·시각화 → <span class="hv">Claude</span></h3><p>엑셀·CSV 업로드 후 분석, 차트·그래프 생성까지</p></div>
+  <div class="g"><h3>긴 문서 분석·요약 → <span class="hb2">Gemini</span></h3><p>긴 보고서·자료집에서 핵심 논점과 근거를 구조화</p></div>
   <div class="g"><h3>초기 방향 탐색 → <span class="htl">ChatGPT</span></h3><p>아이디어 정리, 질문 프레임 구성, 작업 초안 도출</p></div>
-  <div class="g"><h3>단계형 업무 자동화 → <span class="hv">Claude</span></h3><p>자료 읽기 → 정리 → 초안 작성까지 순차 처리</p></div>
-  <div class="g"><h3>장문 문서 리뷰 → <span class="hb2">Gemini</span></h3><p>긴 보고서·자료집에서 핵심 논점과 근거를 구조화</p></div>
-  <div class="g"><h3>연동·확장 활용 → <span class="htl">ChatGPT</span></h3><p>외부 서비스 연결과 확장형 워크플로우 설계</p></div>
+  <div class="g"><h3>엑셀 데이터 정리 → <span class="hv">Claude</span></h3><p>복잡한 엑셀 데이터 정제·분류·재구성</p></div>
+  <div class="g"><h3>이미지·영상 해석 → <span class="hb2">Gemini</span></h3><p>사진 속 텍스트, 차트 의미, 영상 핵심 장면 추출</p></div>
+  <div class="g"><h3>보고서/기획서 작성 → <span class="htl">ChatGPT</span></h3><p>빠른 초안 도출과 다양한 서비스 연동 활용</p></div>
 </div>`},
 
-/* ── 19. 만능 프롬프트 3요소 ── */
-{id:"prompt",r:()=>`
-<div>
-  <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>프롬프트 핵심</span>
-  <h2 class="t" data-a style="animation-delay:60ms"><span class="gt">만능 프롬프트</span> 3요소</h2>
-</div>
-<div data-a style="animation-delay:150ms">
-  <div class="hb" style="text-align:center;margin-bottom:12px;padding:16px 20px">
-    <div class="ht" style="font-size:clamp(1.1rem,1.6vw,1.5rem)">
-      <span style="color:var(--amber)">역할 부여</span> + <span style="color:var(--teal)">인사이트 → 최적안</span> + <span style="color:var(--rose)">반말 톤</span> = <strong>만능 프롬프트</strong>
-    </div>
-  </div>
-  <div class="g3">
-    <div class="g">
-      <h3><span style="color:var(--amber)">1</span> 역할 부여</h3>
-      <p>AI에게 <strong>전문가 역할</strong>을 먼저 부여하면 답변의 깊이가 올라갑니다.</p>
-      <div class="kp" style="margin-top:8px;font-size:.95rem">
-        "너는 <strong class="ha">20년차 행정 전문가</strong>야. 정책 보고서를 검토하고 개선안을 제시해."
-      </div>
-    </div>
-    <div class="g">
-      <h3><span style="color:var(--teal)">2</span> 인사이트 → 최적안</h3>
-      <p><strong>여러 관점</strong>에서 아이디어를 뽑은 뒤 <strong>최적안</strong>을 골라달라고 요청합니다.</p>
-      <div class="kp" style="margin-top:8px;font-size:.95rem;border-left-color:var(--teal)">
-        "<strong class="htl">5가지 이상 개선 방향</strong>을 도출하고, 실현 가능성 기준으로 <strong class="htl">최적안 1개</strong>를 추천해."
-      </div>
-    </div>
-    <div class="g">
-      <h3><span style="color:var(--rose)">3</span> 반말 톤 지정</h3>
-      <p>연구에 따르면 <strong>직접적이고 간결한 톤</strong>이 과도한 존댓말보다 AI 성능이 높습니다.</p>
-      <div class="kp" style="margin-top:8px;font-size:.95rem;border-left-color:var(--rose)">
-        <strong class="hr">핵심만 짧게</strong> 지시 → 수식어·인사 제거 → 정확한 답변
-      </div>
-    </div>
-  </div>
-</div>`},
-
-/* ── 20. AI 릴레이 워크플로우 ── */
+/* ── 19. AI 릴레이 워크플로우 ── */
 {id:"relay",r:()=>`
 <div>
   <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>실전 워크플로우</span>
@@ -810,6 +780,43 @@ const S = [
   <div class="hb" style="text-align:center;padding:14px 20px">
     <div class="ht" style="font-size:clamp(.95rem,1.3vw,1.2rem)">
       → 완성된 업무 결과물 (계획서·보고서·기획안)
+    </div>
+  </div>
+</div>`},
+
+/* ── 20. 만능 프롬프트 3요소 ── */
+{id:"prompt",r:()=>`
+<div>
+  <span class="kicker" data-a style="animation-delay:0ms"><span class="kdot"></span>프롬프트 핵심</span>
+  <h2 class="t" data-a style="animation-delay:60ms"><span class="gt">만능 프롬프트</span> 3요소</h2>
+</div>
+<div data-a style="animation-delay:150ms">
+  <div class="hb" style="text-align:center;margin-bottom:12px;padding:16px 20px">
+    <div class="ht" style="font-size:clamp(1.1rem,1.6vw,1.5rem)">
+      <span style="color:var(--amber)">역할 부여</span> + <span style="color:var(--teal)">인사이트 → 최적안</span> + <span style="color:var(--rose)">반말 톤</span> = <strong>만능 프롬프트</strong>
+    </div>
+  </div>
+  <div class="g3">
+    <div class="g">
+      <h3><span style="color:var(--amber)">1</span> 역할 부여</h3>
+      <p>AI에게 <strong>전문가 역할</strong>을 먼저 부여하면 답변의 깊이가 올라갑니다.</p>
+      <div class="kp" style="margin-top:8px;font-size:.95rem">
+        "너는 <strong class="ha">20년차 행정 전문가</strong>야. 정책 보고서를 검토하고 개선안을 제시해."
+      </div>
+    </div>
+    <div class="g">
+      <h3><span style="color:var(--teal)">2</span> 인사이트 → 최적안</h3>
+      <p><strong>여러 관점</strong>에서 아이디어를 뽑은 뒤 <strong>최적안</strong>을 골라달라고 요청합니다.</p>
+      <div class="kp" style="margin-top:8px;font-size:.95rem;border-left-color:var(--teal)">
+        "<strong class="htl">5가지 이상 개선 방향</strong>을 도출하고, 실현 가능성 기준으로 <strong class="htl">최적안 1개</strong>를 추천해."
+      </div>
+    </div>
+    <div class="g">
+      <h3><span style="color:var(--rose)">3</span> 반말 톤 지정</h3>
+      <p>연구에 따르면 <strong>직접적이고 간결한 톤</strong>이 과도한 존댓말보다 AI 성능이 높습니다.</p>
+      <div class="kp" style="margin-top:8px;font-size:.95rem;border-left-color:var(--rose)">
+        <strong class="hr">핵심만 짧게</strong> 지시 → 수식어·인사 제거 → 정확한 답변
+      </div>
     </div>
   </div>
 </div>`},
@@ -876,26 +883,26 @@ const S = [
 {id:"closing",r:()=>`
 <div></div>
 <div class="cl" style="gap:16px">
-  <div style="font-size:2.5rem;opacity:.6" data-a style="animation-delay:0ms">⭐</div>
-  <p style="font-size:clamp(.95rem,1.3vw,1.2rem);color:var(--text-2);font-weight:500" data-a style="animation-delay:80ms">다음 AI 챔피언은</p>
+  <div style="font-size:3.5rem;opacity:.6" data-a style="animation-delay:0ms">⭐</div>
+  <p style="font-size:clamp(1.3rem,1.8vw,1.7rem);color:var(--text-2);font-weight:500" data-a style="animation-delay:80ms">다음 AI 챔피언은</p>
   <div class="closing-t" data-a style="animation-delay:150ms">
     <span class="gt">여러분</span>입니다
   </div>
-  <div class="dv" style="width:50px;margin:4px 0"></div>
-  <div style="display:flex;gap:clamp(8px,2vw,20px);flex-wrap:wrap;justify-content:center" data-a style="animation-delay:230ms">
-    <span class="chip cb">절대평가 75점</span>
-    <span class="chip cv">비대면 3주</span>
-    <span class="chip ct">연수 4일</span>
-    <span class="chip ca">무료 도구</span>
+  <div class="dv" style="width:60px;margin:8px 0"></div>
+  <div style="display:flex;gap:clamp(10px,2.5vw,24px);flex-wrap:wrap;justify-content:center" data-a style="animation-delay:230ms">
+    <span class="chip cb" style="font-size:1.1rem;padding:8px 18px">절대평가 75점</span>
+    <span class="chip cv" style="font-size:1.1rem;padding:8px 18px">비대면 3주</span>
+    <span class="chip ct" style="font-size:1.1rem;padding:8px 18px">연수 4일</span>
+    <span class="chip ca" style="font-size:1.1rem;padding:8px 18px">무료 도구</span>
   </div>
-  <div style="margin-top:14px;text-align:center;max-width:500px" data-a style="animation-delay:300ms">
-    <p style="color:var(--text-3);font-size:clamp(.9rem,1.1vw,1.1rem);font-weight:500;line-height:1.6;margin-bottom:6px">
+  <div style="margin-top:20px;text-align:center;max-width:600px" data-a style="animation-delay:300ms">
+    <p style="color:var(--text-3);font-size:clamp(1.1rem,1.4vw,1.4rem);font-weight:500;line-height:1.6;margin-bottom:8px">
       특별한 배경이 아니라,
     </p>
-    <p style="font-size:clamp(1rem,1.4vw,1.3rem);font-weight:700;line-height:1.5">
+    <p style="font-size:clamp(1.3rem,1.8vw,1.8rem);font-weight:700;line-height:1.5">
       업무 현장의 불편함을 해결하고 싶은 마음에서 시작됩니다.
     </p>
-    <p style="margin-top:12px;color:var(--text-3);font-size:clamp(.9rem,1.1vw,1rem)">감사합니다</p>
+    <p style="margin-top:16px;color:var(--text-3);font-size:clamp(1.1rem,1.4vw,1.3rem)">감사합니다</p>
   </div>
 </div>`}
 
