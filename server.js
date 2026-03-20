@@ -1,12 +1,36 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const fs = require('fs');
+const { Pool } = require('pg');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const SECRET = process.env.COOKIE_SECRET || 'gorae-i-2026-whale-secret';
-const DATA_FILE = path.join(__dirname, 'data', 'attendance.json');
+
+// ═══════════════════════════════════════════════════════════
+// PostgreSQL 연결 (Railway 환경변수 DATABASE_URL 자동 주입)
+// ═══════════════════════════════════════════════════════════
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.DATABASE_URL?.includes('railway') ? { rejectUnauthorized: false } : false,
+});
+
+async function initDB() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS attendance (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(100) NOT NULL,
+      dept VARCHAR(200) NOT NULL,
+      lecture_id VARCHAR(50) NOT NULL,
+      lecture_name VARCHAR(200) NOT NULL,
+      month VARCHAR(20),
+      timestamp TIMESTAMPTZ DEFAULT NOW(),
+      UNIQUE(name, dept, lecture_id)
+    )
+  `);
+  const { rows } = await pool.query('SELECT COUNT(*) as cnt FROM attendance');
+  console.log(`[DB] PostgreSQL 연결 완료, 기존 출석 기록 ${rows[0].cnt}건`);
+}
 
 // ═══════════════════════════════════════════════════════════
 // 강의 설정
@@ -22,38 +46,11 @@ const LECTURES = {
   'gov03': { name: '3월 북구청 AI직무역량강화', month: '3월', group: '지자체', active: true, adminOnly: true },
 };
 
-// ═══════════════════════════════════════════════════════════
-// 파일 기반 출석 저장 (서버 재시작해도 유지)
-// ═══════════════════════════════════════════════════════════
-function loadAttendance() {
-  try {
-    if (fs.existsSync(DATA_FILE)) {
-      return JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
-    }
-  } catch (e) {
-    console.error('[WARN] attendance.json 로드 실패, 빈 배열로 시작:', e.message);
-  }
-  return [];
-}
-
-function saveAttendance() {
-  try {
-    const dir = path.dirname(DATA_FILE);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(DATA_FILE, JSON.stringify(attendanceLog, null, 2), 'utf-8');
-  } catch (e) {
-    console.error('[ERROR] attendance.json 저장 실패:', e.message);
-  }
-}
-
-const attendanceLog = loadAttendance();
-console.log(`[DATA] 기존 출석 기록 ${attendanceLog.length}건 로드됨`);
-
 app.use(express.json());
 app.use(cookieParser(SECRET));
 
 // ── API: 출석 등록 (이름 + 부서명) ──
-app.post('/api/verify', (req, res) => {
+app.post('/api/verify', async (req, res) => {
   const { lectureId, name, dept } = req.body;
 
   if (!lectureId || !name || !dept) {
@@ -65,43 +62,50 @@ app.post('/api/verify', (req, res) => {
     return res.json({ success: false, message: '아직 준비되지 않은 강의입니다.' });
   }
 
-  // 동일인 중복 출석 방지 (같은 이름 + 부서 + 강의)
-  const existing = attendanceLog.find(
-    e => e.lectureId === lectureId && e.name === name && e.dept === dept
-  );
-
-  if (!existing) {
-    const entry = {
-      name,
-      dept,
-      lectureId,
-      lectureName: lecture.name,
-      month: lecture.month,
-      timestamp: new Date().toISOString(),
-    };
-    attendanceLog.push(entry);
-    saveAttendance();
-    console.log('[ATTENDANCE]', JSON.stringify(entry));
-  }
-
-  let access = {};
   try {
-    access = req.signedCookies.gorae_access
-      ? JSON.parse(req.signedCookies.gorae_access)
-      : {};
-  } catch { access = {}; }
+    // UPSERT: 중복이면 무시, 없으면 삽입
+    const { rows } = await pool.query(
+      `INSERT INTO attendance (name, dept, lecture_id, lecture_name, month)
+       VALUES ($1, $2, $3, $4, $5)
+       ON CONFLICT (name, dept, lecture_id) DO NOTHING
+       RETURNING timestamp`,
+      [name, dept, lectureId, lecture.name, lecture.month]
+    );
 
-  const ts = existing ? existing.timestamp : attendanceLog[attendanceLog.length - 1].timestamp;
-  access[lectureId] = { name, dept, timestamp: ts };
+    let ts;
+    if (rows.length > 0) {
+      ts = rows[0].timestamp;
+      console.log('[ATTENDANCE]', JSON.stringify({ name, dept, lectureId }));
+    } else {
+      // 이미 존재하는 경우 timestamp 조회
+      const existing = await pool.query(
+        'SELECT timestamp FROM attendance WHERE name=$1 AND dept=$2 AND lecture_id=$3',
+        [name, dept, lectureId]
+      );
+      ts = existing.rows[0].timestamp;
+    }
 
-  res.cookie('gorae_access', JSON.stringify(access), {
-    signed: true,
-    httpOnly: true,
-    maxAge: 365 * 24 * 60 * 60 * 1000,
-    sameSite: 'lax',
-  });
+    let access = {};
+    try {
+      access = req.signedCookies.gorae_access
+        ? JSON.parse(req.signedCookies.gorae_access)
+        : {};
+    } catch { access = {}; }
 
-  res.json({ success: true, message: `${name}님, 출석이 확인되었습니다!` });
+    access[lectureId] = { name, dept, timestamp: ts };
+
+    res.cookie('gorae_access', JSON.stringify(access), {
+      signed: true,
+      httpOnly: true,
+      maxAge: 365 * 24 * 60 * 60 * 1000,
+      sameSite: 'lax',
+    });
+
+    res.json({ success: true, message: `${name}님, 출석이 확인되었습니다!` });
+  } catch (e) {
+    console.error('[ERROR] 출석 등록 실패:', e.message);
+    res.json({ success: false, message: '서버 오류가 발생했습니다.' });
+  }
 });
 
 // ── API: 접근 상태 확인 ──
@@ -150,92 +154,105 @@ function adminAuth(req, res, next) {
 }
 
 // ── API: 강의 설정 정보 (관리자용) ──
-app.get('/api/admin/lectures', adminAuth, (req, res) => {
-  const result = {};
-  for (const [id, lec] of Object.entries(LECTURES)) {
-    const count = attendanceLog.filter(e => e.lectureId === id).length;
-    result[id] = { ...lec, count };
+app.get('/api/admin/lectures', adminAuth, async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      'SELECT lecture_id, COUNT(*) as cnt FROM attendance GROUP BY lecture_id'
+    );
+    const counts = {};
+    rows.forEach(r => { counts[r.lecture_id] = parseInt(r.cnt); });
+
+    const result = {};
+    for (const [id, lec] of Object.entries(LECTURES)) {
+      result[id] = { ...lec, count: counts[id] || 0 };
+    }
+    res.json(result);
+  } catch (e) {
+    console.error('[ERROR] lectures 조회 실패:', e.message);
+    res.status(500).json({ error: '서버 오류' });
   }
-  res.json(result);
 });
 
 // ── API: 출석부 조회 (관리자용) ──
-app.get('/api/admin/attendance', adminAuth, (req, res) => {
-  const monthFilter = req.query.month; // optional: "3월", "4월" ...
-  const lectureFilter = req.query.lecture; // optional: "03AB"
-
-  let filtered = attendanceLog;
-  if (monthFilter) filtered = filtered.filter(e => e.month === monthFilter);
-  if (lectureFilter) filtered = filtered.filter(e => e.lectureId === lectureFilter);
-
-  // 강의별 그룹화
-  const grouped = {};
-  for (const [id, lec] of Object.entries(LECTURES)) {
-    if (monthFilter && lec.month !== monthFilter) continue;
-    if (lectureFilter && id !== lectureFilter) continue;
-    grouped[id] = {
-      name: lec.name,
-      month: lec.month,
-      active: lec.active,
-      adminOnly: lec.adminOnly || false,
-      total: 0,
-      attendees: [],
-    };
-  }
-
-  filtered.forEach(entry => {
-    if (!grouped[entry.lectureId]) {
-      grouped[entry.lectureId] = {
-        name: entry.lectureName,
-        month: entry.month || '',
-        active: false,
-        total: 0,
-        attendees: [],
-      };
-    }
-    grouped[entry.lectureId].total++;
-    grouped[entry.lectureId].attendees.push({
-      name: entry.name,
-      dept: entry.dept,
-      timestamp: entry.timestamp,
-    });
-  });
-
-  // 월 목록
-  const months = [...new Set(Object.values(LECTURES).map(l => l.month))];
-
-  res.json({
-    totalEntries: filtered.length,
-    months,
-    lectures: grouped,
-  });
-});
-
-// ── API: 출석부 CSV 다운로드 ──
-app.get('/api/admin/download', adminAuth, (req, res) => {
+app.get('/api/admin/attendance', adminAuth, async (req, res) => {
   const monthFilter = req.query.month;
   const lectureFilter = req.query.lecture;
 
-  let filtered = attendanceLog;
-  if (monthFilter) filtered = filtered.filter(e => e.month === monthFilter);
-  if (lectureFilter) filtered = filtered.filter(e => e.lectureId === lectureFilter);
+  try {
+    let query = 'SELECT name, dept, lecture_id, lecture_name, month, timestamp FROM attendance WHERE 1=1';
+    const params = [];
+    if (monthFilter) { params.push(monthFilter); query += ` AND month=$${params.length}`; }
+    if (lectureFilter) { params.push(lectureFilter); query += ` AND lecture_id=$${params.length}`; }
+    query += ' ORDER BY timestamp ASC';
 
-  const BOM = '\uFEFF';
-  const header = '번호,이름,부서명,강의,월,일시';
-  const rows = filtered.map((e, i) => {
-    const dt = new Date(e.timestamp);
-    const dateStr = `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')} ${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`;
-    return `${i + 1},"${e.name}","${e.dept}","${e.lectureName}","${e.month || ''}","${dateStr}"`;
-  });
-  const csv = BOM + header + '\n' + rows.join('\n');
+    const { rows } = await pool.query(query, params);
 
-  let tag = '전체';
-  if (lectureFilter) tag = lectureFilter;
-  else if (monthFilter) tag = monthFilter;
+    // 강의별 그룹화
+    const grouped = {};
+    for (const [id, lec] of Object.entries(LECTURES)) {
+      if (monthFilter && lec.month !== monthFilter) continue;
+      if (lectureFilter && id !== lectureFilter) continue;
+      grouped[id] = {
+        name: lec.name, month: lec.month, active: lec.active,
+        adminOnly: lec.adminOnly || false, total: 0, attendees: [],
+      };
+    }
 
-  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${encodeURIComponent(`출석부_${tag}.csv`)}`);
-  res.send(csv);
+    rows.forEach(entry => {
+      if (!grouped[entry.lecture_id]) {
+        grouped[entry.lecture_id] = {
+          name: entry.lecture_name, month: entry.month || '',
+          active: false, total: 0, attendees: [],
+        };
+      }
+      grouped[entry.lecture_id].total++;
+      grouped[entry.lecture_id].attendees.push({
+        name: entry.name, dept: entry.dept, timestamp: entry.timestamp,
+      });
+    });
+
+    const months = [...new Set(Object.values(LECTURES).map(l => l.month))];
+    res.json({ totalEntries: rows.length, months, lectures: grouped });
+  } catch (e) {
+    console.error('[ERROR] attendance 조회 실패:', e.message);
+    res.status(500).json({ error: '서버 오류' });
+  }
+});
+
+// ── API: 출석부 CSV 다운로드 ──
+app.get('/api/admin/download', adminAuth, async (req, res) => {
+  const monthFilter = req.query.month;
+  const lectureFilter = req.query.lecture;
+
+  try {
+    let query = 'SELECT name, dept, lecture_name, month, timestamp FROM attendance WHERE 1=1';
+    const params = [];
+    if (monthFilter) { params.push(monthFilter); query += ` AND month=$${params.length}`; }
+    if (lectureFilter) { params.push(lectureFilter); query += ` AND lecture_id=$${params.length}`; }
+    query += ' ORDER BY timestamp ASC';
+
+    const { rows } = await pool.query(query, params);
+
+    const BOM = '\uFEFF';
+    const header = '번호,이름,부서명,강의,월,일시';
+    const csvRows = rows.map((e, i) => {
+      const dt = new Date(e.timestamp);
+      const dateStr = `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')} ${String(dt.getHours()).padStart(2,'0')}:${String(dt.getMinutes()).padStart(2,'0')}`;
+      return `${i + 1},"${e.name}","${e.dept}","${e.lecture_name}","${e.month || ''}","${dateStr}"`;
+    });
+    const csv = BOM + header + '\n' + csvRows.join('\n');
+
+    let tag = '전체';
+    if (lectureFilter) tag = lectureFilter;
+    else if (monthFilter) tag = monthFilter;
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${encodeURIComponent(`출석부_${tag}.csv`)}`);
+    res.send(csv);
+  } catch (e) {
+    console.error('[ERROR] CSV 다운로드 실패:', e.message);
+    res.status(500).json({ error: '서버 오류' });
+  }
 });
 
 // ── 관리자 페이지 ──
@@ -280,10 +297,17 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`🐋 고래.I Server running on port ${PORT}`);
-  const active = Object.entries(LECTURES)
-    .filter(([, v]) => v.active)
-    .map(([k]) => k);
-  console.log(`Active lectures: ${active.join(', ') || 'none'}`);
-});
+initDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`🐋 고래.I Server running on port ${PORT}`);
+      const active = Object.entries(LECTURES)
+        .filter(([, v]) => v.active)
+        .map(([k]) => k);
+      console.log(`Active lectures: ${active.join(', ') || 'none'}`);
+    });
+  })
+  .catch(e => {
+    console.error('[FATAL] DB 초기화 실패:', e.message);
+    process.exit(1);
+  });
